@@ -1,0 +1,129 @@
+
+stall.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+curtain
+  rotate: false
+  xy: 1, 593
+  size: 131, 426
+  orig: 131, 426
+  offset: 0, 0
+  index: -1
+bg_blue
+  rotate: false
+  xy: 134, 763
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+tree_pine
+  rotate: false
+  xy: 392, 764
+  size: 119, 255
+  orig: 119, 255
+  offset: 0, 0
+  index: -1
+bg_green
+  rotate: false
+  xy: 134, 505
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bg_red
+  rotate: false
+  xy: 1, 247
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+tree_oak
+  rotate: false
+  xy: 1, 1
+  size: 143, 244
+  orig: 143, 244
+  offset: 0, 0
+  index: -1
+water1
+  rotate: false
+  xy: 259, 279
+  size: 132, 224
+  orig: 132, 224
+  offset: 0, 0
+  index: -1
+water2
+  rotate: false
+  xy: 146, 22
+  size: 132, 223
+  orig: 132, 223
+  offset: 0, 0
+  index: -1
+grass2
+  rotate: false
+  xy: 280, 61
+  size: 132, 216
+  orig: 132, 216
+  offset: 0, 0
+  index: -1
+botom_wood
+  rotate: false
+  xy: 392, 646
+  size: 17, 116
+  orig: 17, 116
+  offset: 0, 0
+  index: -1
+curtain_rope
+  rotate: false
+  xy: 1, 570
+  size: 40, 21
+  orig: 40, 21
+  offset: 0, 0
+  index: -1
+
+stall2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bg_wood
+  rotate: false
+  xy: 1, 234
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+curtain_straight
+  rotate: false
+  xy: 1, 152
+  size: 256, 80
+  orig: 256, 80
+  offset: 0, 0
+  index: -1
+grass1
+  rotate: false
+  xy: 259, 290
+  size: 132, 200
+  orig: 132, 200
+  offset: 0, 0
+  index: -1
+curtain_top
+  rotate: false
+  xy: 1, 87
+  size: 200, 63
+  orig: 200, 63
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 1, 1
+  size: 141, 84
+  orig: 141, 84
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 259, 206
+  size: 134, 82
+  orig: 134, 82
+  offset: 0, 0
+  index: -1

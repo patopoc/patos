@@ -1,0 +1,332 @@
+
+objects.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+rifle
+  rotate: false
+  xy: 1, 704
+  size: 142, 319
+  orig: 142, 319
+  offset: 0, 0
+  index: -1
+rifle_red
+  rotate: false
+  xy: 1, 383
+  size: 141, 319
+  orig: 141, 319
+  offset: 0, 0
+  index: -1
+target_back_outline
+  rotate: false
+  xy: 145, 881
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+target_colored_outline
+  rotate: false
+  xy: 145, 737
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+target_red1_outline
+  rotate: false
+  xy: 289, 881
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+target_red2_outline
+  rotate: false
+  xy: 289, 737
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+target_red3_outline
+  rotate: false
+  xy: 1, 239
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+target_white_outline
+  rotate: false
+  xy: 1, 95
+  size: 142, 142
+  orig: 142, 142
+  offset: 0, 0
+  index: -1
+stick_metal_outline
+  rotate: false
+  xy: 433, 896
+  size: 34, 127
+  orig: 34, 127
+  offset: 0, 0
+  index: -1
+stick_woodFixed_outline
+  rotate: false
+  xy: 433, 767
+  size: 34, 127
+  orig: 34, 127
+  offset: 0, 0
+  index: -1
+stick_wood_outline
+  rotate: false
+  xy: 469, 896
+  size: 34, 127
+  orig: 34, 127
+  offset: 0, 0
+  index: -1
+target_back
+  rotate: false
+  xy: 145, 607
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+target_colored
+  rotate: false
+  xy: 275, 607
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+target_red1
+  rotate: false
+  xy: 144, 477
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+target_red2
+  rotate: false
+  xy: 274, 477
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+target_red3
+  rotate: false
+  xy: 145, 347
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+target_white
+  rotate: false
+  xy: 145, 217
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+duck_outline_back
+  rotate: false
+  xy: 275, 366
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+duck_outline_brown
+  rotate: false
+  xy: 145, 106
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+duck_outline_target_brown
+  rotate: false
+  xy: 275, 255
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+stick_metal
+  rotate: false
+  xy: 469, 771
+  size: 30, 123
+  orig: 30, 123
+  offset: 0, 0
+  index: -1
+duck_outline_target_white
+  rotate: false
+  xy: 275, 144
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+stick_wood
+  rotate: false
+  xy: 405, 612
+  size: 30, 123
+  orig: 30, 123
+  offset: 0, 0
+  index: -1
+duck_outline_target_yellow
+  rotate: false
+  xy: 261, 33
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+stick_woodFixed
+  rotate: false
+  xy: 391, 352
+  size: 30, 123
+  orig: 30, 123
+  offset: 0, 0
+  index: -1
+duck_outline_white
+  rotate: false
+  xy: 391, 241
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+duck_outline_yellow
+  rotate: false
+  xy: 391, 130
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+duck_back
+  rotate: false
+  xy: 377, 33
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+duck_brown
+  rotate: false
+  xy: 145, 9
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+duck_target_brown
+  rotate: false
+  xy: 404, 510
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+stick_metal_outline_broken
+  rotate: false
+  xy: 478, 65
+  size: 18, 63
+  orig: 18, 63
+  offset: 0, 0
+  index: -1
+stick_wood_outline_broken
+  rotate: false
+  xy: 1, 30
+  size: 18, 63
+  orig: 18, 63
+  offset: 0, 0
+  index: -1
+stick_metal_broken
+  rotate: false
+  xy: 21, 34
+  size: 14, 59
+  orig: 14, 59
+  offset: 0, 0
+  index: -1
+stick_wood_broken
+  rotate: false
+  xy: 37, 34
+  size: 14, 59
+  orig: 14, 59
+  offset: 0, 0
+  index: -1
+shot_blue_large
+  rotate: false
+  xy: 246, 1
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+shot_brown_large
+  rotate: false
+  xy: 278, 1
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+shot_grey_large
+  rotate: false
+  xy: 310, 1
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+shot_yellow_large
+  rotate: false
+  xy: 342, 1
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+shot_blue_small
+  rotate: false
+  xy: 433, 745
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+shot_brown_small
+  rotate: false
+  xy: 404, 488
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+shot_grey_small
+  rotate: false
+  xy: 53, 73
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+shot_yellow_small
+  rotate: false
+  xy: 374, 11
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+
+objects2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+duck_target_white
+  rotate: false
+  xy: 1, 1
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+duck_target_yellow
+  rotate: false
+  xy: 102, 1
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+duck_white
+  rotate: false
+  xy: 203, 1
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
+duck_yellow
+  rotate: false
+  xy: 304, 1
+  size: 99, 95
+  orig: 99, 95
+  offset: 0, 0
+  index: -1
