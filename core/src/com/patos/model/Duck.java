@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.patos.MainGame;
+import com.patos.handlers.MoveToSin;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
@@ -78,11 +79,22 @@ public class Duck extends Group{
         duckImage.setPosition(getWidth() / 2 - duckImage.getWidth() / 2, stick.getHeight() - 5);
         stick.setPosition(getWidth() / 2 - stick.getWidth() / 2, 0);
 
-        addAction(Actions.parallel(
-                Actions.moveTo(MainGame.worldWidth, 0, type.getSpeed()),
-                Actions.forever(Actions.sequence(Actions.moveBy(0, 100, 1f),
-                        Actions.moveBy(0, -100, 1f)))));
-        MoveToAction ac= new MoveToAction();
+        MoveToSin moveToSin= new MoveToSin();
+        moveToSin.setPosition(MainGame.worldWidth, 0);
+        moveToSin.setDuration(type.getSpeed());
+        moveToSin.setPeriod(1f);
+        moveToSin.setRange(50f);
+        moveToSin.setStartPosition(0,getY());
+        addAction(Actions.sequence(moveToSin, Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                removeDuck();
+            }
+        })));
 
+    }
+
+    private void removeDuck(){
+        this.remove();
     }
 }

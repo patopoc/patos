@@ -44,6 +44,7 @@ public class MainGame extends ApplicationAdapter {
     public static TextureAtlas hudAtlas;
     public static Stage stage;
     public static Group ducksLayer;
+    public static Group targetsLayer;
 
 	@Override
 	public void create () {
@@ -53,13 +54,23 @@ public class MainGame extends ApplicationAdapter {
         stage= new Stage(new FillViewport(worldWidth, worldHeight));
         mainCam.setToOrtho(false, worldWidth, worldHeight);
         mainCam.update();
+        setStage();
+        engine= new Engine(20, 1, 10, 4);
+
+	}
+
+    private void setStage(){
         stallAtlas= new TextureAtlas(Gdx.files.internal("stall.atlas"));
         objectAtlas= new TextureAtlas(Gdx.files.internal("objects.atlas"));
         hudAtlas= new TextureAtlas(Gdx.files.internal("hud.atlas"));
-        engine= new Engine(20, 1);
+
         Image bgImage = new Image(new TiledDrawable(stallAtlas.findRegion("bg_wood")));
         bgImage.setSize(worldWidth, worldHeight);
         stage.addActor(bgImage);
+
+        targetsLayer= new Group();
+        targetsLayer.setPosition(0,0);
+        stage.addActor(targetsLayer);
 
         drawCompoundBackground("grass", 0, 60);
 
@@ -108,8 +119,7 @@ public class MainGame extends ApplicationAdapter {
         curtainStraight.setWidth(worldWidth);
         stage.addActor(curtainStraight);
 
-	}
-
+    }
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
