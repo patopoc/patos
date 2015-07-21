@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.patos.controller.Engine;
 import com.patos.handlers.Content;
 import com.patos.prefabs.Curtain;
 
@@ -29,16 +30,20 @@ import javax.xml.soap.Text;
 public class MainGame extends ApplicationAdapter {
 
     private final float SCALE= 1f;
+
     private SpriteBatch batch;
+    private Engine engine;
     private Content res;
     private OrthographicCamera mainCam;
-    private float worldWidth=900f;
-    private float worldHeight=500f;
-    private TextureAtlas stallAtlas;
-    private TextureAtlas objectAtlas;
-    private TextureAtlas hudAtlas;
-    private Stage stage;
+    public static float worldWidth=900f;
+    public static float worldHeight=500f;
     private Sprite wave;
+
+    public static TextureAtlas stallAtlas;
+    public static TextureAtlas objectAtlas;
+    public static TextureAtlas hudAtlas;
+    public static Stage stage;
+    public static Group ducksLayer;
 
 	@Override
 	public void create () {
@@ -51,15 +56,19 @@ public class MainGame extends ApplicationAdapter {
         stallAtlas= new TextureAtlas(Gdx.files.internal("stall.atlas"));
         objectAtlas= new TextureAtlas(Gdx.files.internal("objects.atlas"));
         hudAtlas= new TextureAtlas(Gdx.files.internal("hud.atlas"));
-
+        engine= new Engine(20, 1);
         Image bgImage = new Image(new TiledDrawable(stallAtlas.findRegion("bg_wood")));
         bgImage.setSize(worldWidth, worldHeight);
         stage.addActor(bgImage);
 
-        drawCompoundBackground("grass", 0, 90);
+        drawCompoundBackground("grass", 0, 60);
+
+        Image treePine= new Image(new TextureRegion(stallAtlas.findRegion("tree_pine")));
+        treePine.setPosition(worldWidth - 180, 150);
+        stage.addActor(treePine);
 
         Image backWave= new Image(new TiledDrawable(stallAtlas.findRegion("water1")));
-        backWave.setPosition(backWave.getWidth() / 2, 20);
+        backWave.setPosition(backWave.getWidth() / 2, -10);
         backWave.setSize(worldWidth, backWave.getHeight());
         backWave.addAction(Actions.forever(Actions.sequence(
                 Actions.moveBy(15, 0, 2),
@@ -67,8 +76,12 @@ public class MainGame extends ApplicationAdapter {
         )));
         stage.addActor(backWave);
 
+        ducksLayer= new Group();
+        ducksLayer.setPosition(0, 80);
+        stage.addActor(ducksLayer);
+
         Image frontWave= new Image(new TiledDrawable(stallAtlas.findRegion("water2")));
-        frontWave.setPosition(0, 0);
+        frontWave.setPosition(0, -30);
         frontWave.setSize(worldWidth, frontWave.getHeight());
         frontWave.addAction(Actions.forever(Actions.sequence(
                 Actions.moveBy(-15, 0, 2),
@@ -102,6 +115,8 @@ public class MainGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mainCam.update();
+        engine.update(Gdx.graphics.getDeltaTime());
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
