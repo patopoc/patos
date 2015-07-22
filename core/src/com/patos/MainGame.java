@@ -33,12 +33,10 @@ public class MainGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
     private Engine engine;
-    private Content res;
-    private OrthographicCamera mainCam;
+
+    public static OrthographicCamera mainCam;
     public static float worldWidth=900f;
     public static float worldHeight=500f;
-    private Sprite wave;
-
     public static TextureAtlas stallAtlas;
     public static TextureAtlas objectAtlas;
     public static TextureAtlas hudAtlas;
@@ -49,12 +47,12 @@ public class MainGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-        res= new Content();
-        mainCam= new OrthographicCamera();
+        //mainCam= new OrthographicCamera();
         stage= new Stage(new FillViewport(worldWidth, worldHeight));
-        mainCam.setToOrtho(false, worldWidth, worldHeight);
-        mainCam.update();
+        //mainCam.setToOrtho(false, worldWidth, worldHeight);
+        //mainCam.update();
         setStage();
+        Gdx.input.setInputProcessor(stage);
         engine= new Engine(20, 1, 10, 4);
 
 	}
@@ -124,13 +122,13 @@ public class MainGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        mainCam.update();
+        //mainCam.update();
         engine.update(Gdx.graphics.getDeltaTime());
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
-        batch.setProjectionMatrix(mainCam.combined);
+        //batch.setProjectionMatrix(mainCam.combined);
         batch.begin();
         //bgTiled.draw(batch, 0, 0, worldWidth, worldHeight);
         batch.end();
@@ -138,10 +136,10 @@ public class MainGame extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height){
-        mainCam.viewportWidth=worldWidth;
-        mainCam.viewportHeight= worldHeight;
-
-        mainCam.update();
+        //mainCam.viewportWidth=worldWidth;
+        //mainCam.viewportHeight= worldHeight;
+        //stage.setViewport(new FillViewport(worldWidth, worldHeight));
+        //mainCam.update();
     }
 
     private void drawCompoundBackground(String spriteSeqBaseName, float x, float y){
