@@ -2,9 +2,12 @@ package com.patos.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.patos.MainGame;
+import com.patos.model.Bullet;
 import com.patos.model.Duck;
 
 /**
@@ -12,8 +15,9 @@ import com.patos.model.Duck;
  */
 public class DuckController {
 
-    private Array<Duck> ducks;
+    public static Array<Duck> ducks;
     private float elapsedTime=0;
+    private int ducksSpawned=0;
 
     public DuckController(int ducksNum){
         ducks= new Array<Duck>();
@@ -43,10 +47,20 @@ public class DuckController {
 
     public void spawnDuck(float delta, float intervalSeconds){
         elapsedTime += delta;
-        if(elapsedTime >= intervalSeconds && ducks.size > 0){
+        if(elapsedTime >= intervalSeconds && ducksSpawned < ducks.size){
             elapsedTime=0;
             //spawn duck
-            MainGame.ducksLayer.addActor(ducks.pop());
+            MainGame.ducksLayer.addActor(ducks.get(ducksSpawned));
+            ducksSpawned++;
+        }
+    }
+
+    public void checkDuckCollision(Rectangle bounds){
+        for(Duck d : ducks){
+            if(bounds.overlaps(d.getBounds())){
+                d.killDuck(Bullet.BulletType.Small,bounds.x, bounds.y);
+                break;
+            }
         }
     }
 }

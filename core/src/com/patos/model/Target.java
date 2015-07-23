@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.patos.MainGame;
+import com.patos.controller.TargetController;
 import com.patos.handlers.MoveToSin;
 
 /**
@@ -63,6 +64,7 @@ public class Target extends Group{
     }
 
     private void removeActor(){
+        TargetController.targets.removeValue(this,false);
         this.remove();
     }
 }

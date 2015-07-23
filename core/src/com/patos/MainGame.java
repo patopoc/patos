@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.patos.controller.Engine;
 import com.patos.handlers.Content;
@@ -33,6 +34,11 @@ public class MainGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
     private Engine engine;
+    private int ducksNum=1;
+    private float ducksInterval=3;
+    private int targetsNum=10;
+    private int targetPositions=4;
+    private float shotDuration=.5f;
 
     public static OrthographicCamera mainCam;
     public static float worldWidth=900f;
@@ -48,12 +54,14 @@ public class MainGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
         //mainCam= new OrthographicCamera();
-        stage= new Stage(new FillViewport(worldWidth, worldHeight));
         //mainCam.setToOrtho(false, worldWidth, worldHeight);
         //mainCam.update();
+
+        stage= new Stage(new FitViewport(worldWidth, worldHeight));
+
         setStage();
         Gdx.input.setInputProcessor(stage);
-        engine= new Engine(20, 1, 10, 4);
+        engine= new Engine(ducksNum, ducksInterval, targetsNum, targetPositions,shotDuration);
 
 	}
 
@@ -67,7 +75,7 @@ public class MainGame extends ApplicationAdapter {
         stage.addActor(bgImage);
 
         targetsLayer= new Group();
-        targetsLayer.setPosition(0,0);
+        targetsLayer.setPosition(0, 0);
         stage.addActor(targetsLayer);
 
         drawCompoundBackground("grass", 0, 60);
@@ -83,7 +91,7 @@ public class MainGame extends ApplicationAdapter {
                 Actions.moveBy(15, 0, 2),
                 Actions.moveBy(-15, 0, 2)
         )));
-        stage.addActor(backWave);
+        //stage.addActor(backWave);
 
         ducksLayer= new Group();
         ducksLayer.setPosition(0, 80);
@@ -96,12 +104,12 @@ public class MainGame extends ApplicationAdapter {
                 Actions.moveBy(-15, 0, 2),
                 Actions.moveBy(15, 0, 2)
         )));
-        stage.addActor(frontWave);
+        //stage.addActor(frontWave);
 
         Image botomWood= new Image(new TiledDrawable(stallAtlas.findRegion("botom_wood")));
         botomWood.setPosition(0, 0);
         botomWood.setWidth(worldWidth);
-        stage.addActor(botomWood);
+        //stage.addActor(botomWood);
 
         drawOverlapedActors("curtain_top",0);
 
@@ -120,7 +128,7 @@ public class MainGame extends ApplicationAdapter {
     }
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //mainCam.update();
         engine.update(Gdx.graphics.getDeltaTime());
@@ -138,7 +146,7 @@ public class MainGame extends ApplicationAdapter {
     public void resize(int width, int height){
         //mainCam.viewportWidth=worldWidth;
         //mainCam.viewportHeight= worldHeight;
-        //stage.setViewport(new FillViewport(worldWidth, worldHeight));
+        stage.getViewport().update(width, height,true);
         //mainCam.update();
     }
 

@@ -12,11 +12,12 @@ import com.patos.model.Target;
  */
 public class TargetController {
 
-    private Array<Target> targets;
+    public static Array<Target> targets;
     private float elapsedTime=0;
     private float timeSeed;
     private Array<Vector2> availablePositions;
     private int targetPositions;
+    private int targetSpawned=0;
 
     public TargetController(int targetsNum, int targetPositions){
         targets= new Array<Target>();
@@ -42,11 +43,12 @@ public class TargetController {
 
     public void spawnTarget(float delta, float intervalSeconds){
         elapsedTime += delta;
-        if(elapsedTime >= intervalSeconds + timeSeed && targets.size > 0){
+        if(elapsedTime >= intervalSeconds + timeSeed && targetSpawned < targets.size){
             elapsedTime=0;
             //spawn target
             int selectPos= MathUtils.random(1,targetPositions-1);
-            Target target= targets.pop();
+            Target target= targets.get(targetSpawned);
+            targetSpawned++;
             target.setPosition(availablePositions.get(selectPos-1).x
                               ,availablePositions.get(selectPos-1).y);
             MainGame.targetsLayer.addActor(target);
