@@ -2,12 +2,18 @@ package com.patos.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.patos.MainGame;
 import com.patos.model.Bullet;
 import com.patos.model.Cartridge;
@@ -72,7 +78,7 @@ public class Engine {
         MainGame.stage.addActor(cartridge);
 
         trigger= new GunTrigger();
-        trigger.setPosition(800,60);
+        trigger.setPosition(800, 60);
         MainGame.stage.addActor(trigger);
 
         MainGame.stage.addActor(crosshair);
@@ -85,6 +91,50 @@ public class Engine {
         touchpad.setBounds(20, 20, 140, 140);
         touchpad.setPosition(20, 20);
         MainGame.stage.addActor(touchpad);
+        readyGo();
+    }
+
+    private void readyGo(){
+        final Image image= new Image(MainGame.hudAtlas.findRegion("text_ready"));
+        image.setPosition(-image.getWidth(), MainGame.worldHeight / 2);
+        SequenceAction seq= new SequenceAction();
+
+        DelayAction preDelay= new DelayAction();
+        preDelay.setDuration(0.5f);
+        MoveToAction moveToAction = new MoveToAction();
+        moveToAction.setPosition(MainGame.worldWidth / 2 - image.getWidth() / 2, image.getY());
+        moveToAction.setDuration(1f);
+        moveToAction.setInterpolation(Interpolation.exp10Out);
+        RunnableAction runnableAction= new RunnableAction(){
+            @Override
+            public void run() {
+                image.setDrawable(new TextureRegionDrawable(MainGame.hudAtlas.findRegion("text_go")));
+            }
+        };
+
+        DelayAction delayAction= new DelayAction();
+        delayAction.setDuration(0.5f);
+        DelayAction delayAction1= new DelayAction();
+        delayAction1.setDuration(0.5f);
+        MoveToAction moveToAction1= new MoveToAction();
+        moveToAction1.setPosition(MainGame.worldWidth, image.getY());
+        moveToAction1.setDuration(1f);
+        moveToAction1.setInterpolation(Interpolation.exp10Out);
+        RunnableAction runnableAction1= new RunnableAction(){
+            @Override
+            public void run(){
+                image.remove();
+            }
+        };
+        seq.addAction(moveToAction);
+        seq.addAction(delayAction);
+        seq.addAction(runnableAction);
+        seq.addAction(delayAction1);
+        seq.addAction(moveToAction1);
+        seq.addAction(runnableAction1);
+        image.addAction(seq);
+
+        MainGame.stage.addActor(image);
     }
 
     public void update(float delta){
