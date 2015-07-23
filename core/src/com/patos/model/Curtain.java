@@ -1,15 +1,13 @@
-package com.patos.prefabs;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+package com.patos.model;
 
 /**
- * Created by steve on 20/07/2015.
+ * Created by steve on 23/07/2015.
  */
+
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 public class Curtain extends Group {
 
     public Curtain(float x, float y, TextureAtlas atlas){

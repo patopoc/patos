@@ -2,31 +2,21 @@ package com.patos;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.patos.controller.Engine;
-import com.patos.handlers.Content;
-import com.patos.prefabs.Curtain;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import javax.xml.soap.Text;
+import com.patos.model.Curtain;
+import com.patos.model.Target;
 
 public class MainGame extends ApplicationAdapter {
 
@@ -34,12 +24,13 @@ public class MainGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
     private Engine engine;
-    private int ducksNum=1;
+    private int ducksNum=10;
     private float ducksInterval=3;
     private int targetsNum=10;
     private int targetPositions=4;
     private float shotDuration=.5f;
 
+    public static boolean debug=true;
     public static OrthographicCamera mainCam;
     public static float worldWidth=900f;
     public static float worldHeight=500f;
@@ -91,7 +82,7 @@ public class MainGame extends ApplicationAdapter {
                 Actions.moveBy(15, 0, 2),
                 Actions.moveBy(-15, 0, 2)
         )));
-        //stage.addActor(backWave);
+        stage.addActor(backWave);
 
         ducksLayer= new Group();
         ducksLayer.setPosition(0, 80);
@@ -104,12 +95,12 @@ public class MainGame extends ApplicationAdapter {
                 Actions.moveBy(-15, 0, 2),
                 Actions.moveBy(15, 0, 2)
         )));
-        //stage.addActor(frontWave);
+        stage.addActor(frontWave);
 
         Image botomWood= new Image(new TiledDrawable(stallAtlas.findRegion("botom_wood")));
         botomWood.setPosition(0, 0);
         botomWood.setWidth(worldWidth);
-        //stage.addActor(botomWood);
+        stage.addActor(botomWood);
 
         drawOverlapedActors("curtain_top",0);
 
@@ -124,6 +115,8 @@ public class MainGame extends ApplicationAdapter {
         curtainStraight.setPosition(0,worldHeight - curtainStraight.getHeight());
         curtainStraight.setWidth(worldWidth);
         stage.addActor(curtainStraight);
+
+
 
     }
 	@Override

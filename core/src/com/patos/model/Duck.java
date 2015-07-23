@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.patos.MainGame;
 import com.patos.controller.DuckController;
+import com.patos.controller.Engine;
 import com.patos.handlers.MoveToSin;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
@@ -44,11 +45,11 @@ public class Duck extends Group{
             this.points= points;
         }
 
-        float getSpeed(){
+        public float getSpeed(){
             return speed;
         }
 
-        float getPoints(){
+        public int getPoints(){
             return points;
         }
     }
@@ -142,6 +143,22 @@ public class Duck extends Group{
         stageToLocalCoordinates(coord);
         shot.setPosition(coord.x, coord.y);
 
+        if(badDuck) {
+            final TextFont pointsTag = new TextFont(TextFont.FontSize.Small);
+            pointsTag.setPosition(coord.x, getHeight() - 20);
+            pointsTag.setText("+" + type.getPoints());
+            pointsTag.setRotation(10f);
+            pointsTag.addAction(
+                    Actions.sequence(Actions.parallel(Actions.moveBy(0, 50, 1f)
+                            , Actions.fadeOut(1f))
+                            , Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            pointsTag.remove();
+                        }
+                    })));
+            addActor(pointsTag);
+        }
         // play killed sound and add points
 
     }
@@ -156,15 +173,17 @@ public class Duck extends Group{
 
         duckImage.localToStageCoordinates(duckStageCoord);
         bounds.setPosition(duckStageCoord.x, duckStageCoord.y);
-        duckStageCoord.set(0,0);
+        duckStageCoord.set(0, 0);
 
-        batch.end();
-        renderer.setProjectionMatrix(batch.getProjectionMatrix());
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(0, 1, 0, 1);
-        renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
-        renderer.end();
-        batch.begin();
+        if(MainGame.debug) {
+            batch.end();
+            renderer.setProjectionMatrix(batch.getProjectionMatrix());
+            renderer.begin(ShapeRenderer.ShapeType.Line);
+            renderer.setColor(0, 1, 0, 1);
+            renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
+            renderer.end();
+            batch.begin();
+        }
     }
 
 }

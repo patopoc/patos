@@ -1,11 +1,15 @@
 package com.patos.controller;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.patos.MainGame;
+import com.patos.model.Bullet;
+import com.patos.model.Duck;
 import com.patos.model.Target;
+import com.patos.utils.Funcs;
 
 /**
  * Created by steve on 21/07/2015.
@@ -63,5 +67,19 @@ public class TargetController {
             position.set(i*targetSeparation, 0);
             availablePositions.add(position);
         }
+    }
+
+    public int checkTargetCollision(Rectangle bounds){
+        int points=0;
+        Rectangle intersection= new Rectangle();
+        for(Target t : targets){
+            if(bounds.overlaps(t.getBounds())){
+                Funcs.intersect(bounds, t.getBounds(), intersection);
+                t.killTarget(Bullet.BulletType.Small,intersection.x, intersection.y);
+                points= t.type.getPoints();
+                break;
+            }
+        }
+        return points;
     }
 }

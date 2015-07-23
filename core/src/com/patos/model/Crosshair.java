@@ -81,13 +81,16 @@ public class Crosshair extends Actor{
             isShooting=false;
             batch.draw(MainGame.hudAtlas.findRegion("crosshair_outline_small"), x, y);
         }
-        batch.end();
-        renderer.setProjectionMatrix(MainGame.stage.getCamera().combined);
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(1, 0, 0, 1);
-        renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
-        renderer.end();
-        batch.begin();
+
+        if(MainGame.debug) {
+            batch.end();
+            renderer.setProjectionMatrix(MainGame.stage.getCamera().combined);
+            renderer.begin(ShapeRenderer.ShapeType.Line);
+            renderer.setColor(1, 0, 0, 1);
+            renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
+            renderer.end();
+            batch.begin();
+        }
     }
 
     //@Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.patos.MainGame;
 import com.patos.model.Bullet;
 import com.patos.model.Duck;
+import com.patos.utils.Funcs;
 
 /**
  * Created by steve on 21/07/2015.
@@ -55,12 +56,20 @@ public class DuckController {
         }
     }
 
-    public void checkDuckCollision(Rectangle bounds){
+    public int checkDuckCollision(Rectangle bounds){
+        int points=0;
+        Rectangle intersection= new Rectangle();
         for(Duck d : ducks){
             if(bounds.overlaps(d.getBounds())){
-                d.killDuck(Bullet.BulletType.Small,bounds.x, bounds.y);
+                Funcs.intersect(bounds, d.getBounds(),intersection);
+                d.killDuck(Bullet.BulletType.Small,intersection.x, intersection.y);
+                if(d.badDuck)
+                    points= d.type.getPoints();
+                else
+                    points= -d.type.getPoints();
                 break;
             }
         }
+        return points;
     }
 }
