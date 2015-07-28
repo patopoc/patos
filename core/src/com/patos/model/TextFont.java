@@ -14,6 +14,8 @@ public class TextFont extends Group {
         Normal, Small
     }
 
+    private float fontWidth=-1;
+    private float fontHeight=-1;
     private FontSize fontSize;
     public TextFont(FontSize fontSize){
         this.fontSize=fontSize;
@@ -21,6 +23,15 @@ public class TextFont extends Group {
 
     public void setText(String text){
         clearChildren();
+        //workaround for different bitmap size, take the size of the 0 wich is the fatty one
+        if(fontSize == FontSize.Small){
+            fontWidth= MainGame.hudAtlas.findRegion("text_0_small").getRegionWidth();
+            fontHeight= MainGame.hudAtlas.findRegion("text_0_small").getRegionHeight();
+        }
+        else if(fontSize == FontSize.Normal){
+
+        }
+
         for(int i= 0; i< text.length(); i++){
             Image character=null;
             if(text.charAt(i) == ':'){
@@ -47,10 +58,11 @@ public class TextFont extends Group {
                 else if(fontSize == FontSize.Small)
                     character= new Image(MainGame.hudAtlas.findRegion("text_"+ text.charAt(i) +"_small"));
             }
+
             if(character != null) {
                 addActor(character);
                 setSize(character.getWidth() * i+1, character.getHeight());
-                character.setPosition(character.getWidth() * i, 0);
+                character.setPosition(fontWidth * i, 0);
             }
         }
     }

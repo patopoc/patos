@@ -30,9 +30,11 @@ public class GamePlayController extends Group {
 
     public boolean isActive=false;
 
-    private DuckController duckController;
-    private TargetController targetController;
-    private int time=20;
+    private TargetController duckController;
+    private String duckControllerGroup="duck";
+    private TargetController boardController;
+    private String boardControllerGroup= "board";
+    private int time=-1;
     private float accumTime;
     TextFont timer;
     private float intervalSeconds;
@@ -54,13 +56,15 @@ public class GamePlayController extends Group {
     private Touchpad touchpad;
     private boolean timeup=false;
     private boolean timeupShowed=false;
+    private boolean gameIsRunning=false;
 
 
-    public GamePlayController(int ducksNum, float duckIntervalSec, int targetsNum, int targetPositions, float shotDuration){
-        duckController= new DuckController(ducksNum);
-        targetController= new TargetController(targetsNum, targetPositions);
+    public GamePlayController(Engine engine, float duckIntervalSec, int targetPositions, float shotDuration){
+        duckController= new TargetController(engine, "targettypes.json",duckControllerGroup);
+        boardController= new TargetController(engine,"targettypes.json",boardControllerGroup, targetPositions);
         intervalSeconds= duckIntervalSec;
         crosshair= new Crosshair(shotDuration);
+        time= engine.levelManager.getLevels().get(engine.levelManager.getCurrentLevel()).time;
         timer= new TextFont(TextFont.FontSize.Small);
         timer.setText(String.valueOf(time));
         timer.setPosition(MainGame.worldWidth / 2 - timer.getWidth() / 2, MainGame.worldHeight - 100);
@@ -94,14 +98,14 @@ public class GamePlayController extends Group {
 
     public void update(float delta){
         accumTime += delta;
-        if(accumTime >= 1 && time > 0){
+        if(accumTime >= 1 && time > 0 && gameIsRunning){
             accumTime=0;
             timer.setText(String.valueOf(--time));
         }
 
         if(time > 0 && !timeup) {
-            duckController.spawnDuck(delta, intervalSeconds);
-            targetController.spawnTarget(delta, intervalSeconds);
+            duckController.spawnTarget(delta, intervalSeconds,duckControllerGroup);
+            boardController.spawnTarget(delta, intervalSeconds, boardControllerGroup);
             if (startMotion) {
                 crosshairX += stepsX;
                 crosshairY += stepsY;
@@ -112,8 +116,8 @@ public class GamePlayController extends Group {
                 if (!crosshair.isShooting && cartridge.getBullets() > 0) {
                     crosshair.shoot();
                     cartridge.removeBullet();
-                    Engine.score += duckController.checkDuckCollision(crosshair.getBounds());
-                    Engine.score += targetController.checkTargetCollision(crosshair.getBounds());
+                    Engine.score += duckController.checkTargetCollision(crosshair.getBounds());
+                    Engine.score += boardController.checkTargetCollision(crosshair.getBounds());
                     if (Engine.score < 0)
                         Engine.score = 0;
                     scoreDisplay.setValue(Engine.score);
@@ -160,6 +164,7 @@ public class GamePlayController extends Group {
         RunnableAction runnableAction1= new RunnableAction(){
             @Override
             public void run(){
+                gameIsRunning=true;
                 image.remove();
             }
         };

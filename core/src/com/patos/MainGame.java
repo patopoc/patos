@@ -16,7 +16,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.patos.controller.Engine;
 import com.patos.model.Curtain;
-import com.patos.model.Target;
 
 public class MainGame extends ApplicationAdapter {
 
@@ -31,6 +30,7 @@ public class MainGame extends ApplicationAdapter {
     private float shotDuration=.5f;
 
     public static boolean debug=true;
+    public static int time=120;
     public static OrthographicCamera mainCam;
     public static float worldWidth=900f;
     public static float worldHeight=500f;

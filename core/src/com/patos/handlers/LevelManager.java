@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter;
+import com.patos.MainGame;
 
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
@@ -21,7 +22,8 @@ public class LevelManager {
     private String levelContent;
 
     public LevelManager(){
-        Gdx.files.local("levels").delete();
+        if(MainGame.debug)
+            Gdx.files.local("levels").delete();
 
         if(!Gdx.files.local("levels").exists()){
             levelContent= Gdx.files.internal("levels.json").readString();
@@ -57,7 +59,18 @@ public class LevelManager {
             content += " \"currentPoints\":";
             content += l.currentPoints + ",";
             content += " \"stars\":";
-            content += l.stars;
+            content += l.stars + ",";
+            content += " \"time\":";
+            content += l.time +",";
+            content += " \"targets\":[";
+            for(LevelTarget levelTarget : l.targets){
+                content += "{\"targetGroup\":\""+levelTarget.targetGroup+"\", ";
+                content += "{\"targetType\":\""+levelTarget.targetType+"\", ";
+                content += "\"num\":"+levelTarget.num + ",";
+                content += "\"chance\":"+levelTarget.chance + "},";
+            }
+            content = content.substring(0, content.length() -1);
+            content +="]";
             content += "},";
         }
         content = content.substring(0, content.length() -1);
@@ -76,6 +89,17 @@ public class LevelManager {
             level.currentPoints= jsonValue.getInt("currentPoints");
             level.maxPoints=jsonValue.getInt("maxPoints");
             level.stars= jsonValue.getInt("stars");
+            level.time= jsonValue.getInt("time");
+            JsonValue jsonTypes= jsonValue.get("targets");
+            level.targets= new Array<LevelTarget>();
+            for(JsonValue typeVal : jsonTypes){
+                LevelTarget levelTarget= new LevelTarget();
+                levelTarget.targetGroup= typeVal.getString("targetGroup");
+                levelTarget.targetType= typeVal.getString("targetType");
+                levelTarget.num= typeVal.getInt("num");
+                levelTarget.chance= typeVal.getInt("chance");
+                level.targets.add(levelTarget);
+            }
             levels.add(level);
         }
     }

@@ -29,6 +29,7 @@ public class MoveToSin extends MoveToAction {
 
     public void setStartPosition(float x, float y){
         startY=y;
+        setY(y);
     }
 
     public void setRange(float range){
@@ -42,11 +43,13 @@ public class MoveToSin extends MoveToAction {
         time += Gdx.graphics.getDeltaTime();
         if(time >= periodSteps){
             time=0;
-            angle +=10;     // counting degrees by 10 because of the limitation with periodSteps
-
-            setY(startY + range * MathUtils.sin(angle * MathUtils.degreesToRadians));
             if(angle >= 360)
                 angle=0;
+
+            setY(startY + range * MathUtils.sin(angle * MathUtils.degreesToRadians));
+
+            angle +=10;     // counting degrees by 10 because of the limitation with periodSteps
+
         }
 
     }

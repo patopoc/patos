@@ -61,8 +61,7 @@ public class Engine {
 
     public void show(String controllerName){
         if(controllerName.equals("gamePlay")){
-            Gdx.app.log("current level",""+levelManager.getCurrentLevel());
-            gamePlayController= new GamePlayController(ducksNum, duckIntervalSec,targetsNum,targetPositions,shotDuration);
+            gamePlayController= new GamePlayController(this, duckIntervalSec, targetPositions,shotDuration);
             gamePlayController.isActive=true;
             MainGame.stage.addActor(gamePlayController);
         }

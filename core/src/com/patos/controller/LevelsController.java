@@ -65,7 +65,7 @@ public class LevelsController extends Group{
                             outAction(new Runnable() {
                                 @Override
                                 public void run() {
-                                    engine.levelManager.setCurrentLevel(currentLevel+1);
+                                    engine.levelManager.setCurrentLevel(currentLevel);
                                     engine.show("gamePlay");
                                     remove();
                                 }

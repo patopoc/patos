@@ -1,0 +1,8 @@
+[{"type":"brown", "speed": 10,"points": 10, "bad":false, "imageName":"duck_outline_brown", "normalSound":"", "deadSound":""},
+  {"type":"brown_bad", "speed": 6,"points": 10, "bad":true, "imageName":"duck_outline_target_brown", "normalSound":"", "deadSound":""},
+  {"type":"yellow", "speed": 4,"points": 20, "bad":false, "imageName":"duck_outline_yellow", "normalSound":"", "deadSound":""},
+  {"type":"yellow_bad", "speed": 4,"points": 20, "bad":true, "imageName":"duck_outline_target_yellow", "normalSound":"", "deadSound":""},
+  {"type":"colored", "speed": 2 ,"points": 30, "bad":false, "imageName":"duck_outline_white", "normalSound":"", "deadSound":""},
+  {"type":"colored_bad", "speed": 2 ,"points": 30, "bad":true, "imageName":"duck_outline_target_white", "normalSound":"", "deadSound":""},
+  {"type":"board_red", "speed": 6 ,"points": 20, "bad":true, "imageName":"target_red1_outline", "normalSound":"", "deadSound":""},
+  {"type":"board_colored", "speed": 3 ,"points": 40, "bad":true, "imageName":"target_colored_outline", "normalSound":"", "deadSound":""}]
