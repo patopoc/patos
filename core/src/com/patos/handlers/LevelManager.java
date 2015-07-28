@@ -21,6 +21,8 @@ public class LevelManager {
     private String levelContent;
 
     public LevelManager(){
+        Gdx.files.local("levels").delete();
+
         if(!Gdx.files.local("levels").exists()){
             levelContent= Gdx.files.internal("levels.json").readString();
             FileHandle file= Gdx.files.local("levels");
@@ -35,7 +37,7 @@ public class LevelManager {
     public void saveLevels(){
         levelContent= createJsonContent();
         FileHandle file= Gdx.files.local("levels");
-        file.writeString(levelContent,false);
+        file.writeString(levelContent, false);
     }
 
     public void updateLevels(){
@@ -82,8 +84,16 @@ public class LevelManager {
         this.currentLevel= currentLevel;
     }
 
+    public int getCurrentLevel(){
+        return currentLevel;
+    }
+
     public void unlockNextLevel(){
         levels.get(currentLevel + 1).levelEnabled=true;
+    }
+
+    public Array<Level> getLevels(){
+        return levels;
     }
 
 

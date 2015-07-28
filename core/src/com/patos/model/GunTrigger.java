@@ -42,6 +42,7 @@ public class GunTrigger extends Actor{
     }
 
     public void setPosition(float x, float y){
+        super.setPosition(x,y);
         this.x=x;
         this.y=y;
     }
@@ -56,9 +57,9 @@ public class GunTrigger extends Actor{
         }
     }
 
-    @Override
-    public Actor hit(float arg0, float arg1, boolean flag){
-        return this;
-    }
+    //@Override
+    //public Actor hit(float arg0, float arg1, boolean flag){
+    //    return this;
+    //}
 
 }

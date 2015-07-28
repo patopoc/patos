@@ -32,7 +32,7 @@ public class MenuController extends Group{
                     outAction(new Runnable() {
                         @Override
                         public void run() {
-                            engine.show("gamePlay");
+                            engine.show("levels");
                             remove();
                         }
                     });
@@ -59,7 +59,6 @@ public class MenuController extends Group{
     }
 
     private void inAction(float x, float y, Runnable action){
-        Gdx.app.log("estams","aqui "+ x +" , "+y);
         addAction(Actions.sequence(Actions.moveTo(x,y,1f),Actions.run(action)));
     }
 }
