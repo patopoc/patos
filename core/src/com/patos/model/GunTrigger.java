@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.patos.MainGame;
+import com.patos.controller.Engine;
 
 /**
  * Created by steve on 21/07/2015.
@@ -30,8 +31,11 @@ public class GunTrigger extends Actor{
         InputListener listener= new InputListener(){
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                isShooting=true;
-                return true;
+                if(!Engine.pause) {
+                    isShooting = true;
+                    return true;
+                }
+                return false;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
                 isShooting=false;

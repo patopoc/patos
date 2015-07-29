@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.patos.MainGame;
+import com.patos.controller.Engine;
 import com.patos.handlers.MoveToSin;
 
 /**
@@ -170,6 +171,12 @@ public class Target extends Group{
             renderer.end();
             batch.begin();
         }
+    }
+
+    @Override
+    public void act(float delta){
+        if(!Engine.pause)
+            super.act(delta);
     }
 
 }

@@ -22,6 +22,7 @@ import com.patos.model.Cartridge;
 import com.patos.model.CounterDisplay;
 import com.patos.model.Crosshair;
 import com.patos.model.GunTrigger;
+import com.patos.model.HUDButton;
 import com.patos.model.TextFont;
 
 /**
@@ -82,7 +83,7 @@ public class GamePlayController extends Group {
         addActor(scoreDisplay);
 
         cartridge= new Cartridge(20, Bullet.BulletType.Small, TextFont.FontSize.Small);
-        cartridge.setPosition(MainGame.worldWidth - 120 ,400);
+        cartridge.setPosition(MainGame.worldWidth - 120, 400);
         addActor(cartridge);
 
         trigger= new GunTrigger();
@@ -99,52 +100,81 @@ public class GamePlayController extends Group {
         touchpad.setBounds(20, 20, 140, 140);
         touchpad.setPosition(20, 20);
         addActor(touchpad);
+
+        final HUDButton pauseButton= new HUDButton("crosshair_outline_large", "crosshair_red_large");
+
+        pauseButton.setInputListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                pauseButton.isPressed = true;
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                pauseButton.isPressed = false;
+                    /*outAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            engine.show("levels");
+                            remove();
+                        }
+                    });*/
+                Engine.pause = !Engine.pause;
+
+            }
+        });
+
+        pauseButton.setPosition(MainGame.worldWidth - pauseButton.getWidth() + 10,
+                                MainGame.worldHeight - pauseButton.getHeight() +10);
+
+        addActor(pauseButton);
+
         readyGo();
     }
 
     public void update(float delta){
-        accumTime += delta;
-        if(accumTime >= 1 && time > 0 && gameIsRunning){
-            accumTime=0;
-            timer.setText(String.valueOf(--time));
-        }
-
-        if(time > 0 && !timeup) {
-            for(TargetController targetController : controllerArray){
-                targetController.spawnTarget(delta, intervalSeconds);
+        if(!Engine.pause) {
+            accumTime += delta;
+            if (accumTime >= 1 && time > 0 && gameIsRunning) {
+                accumTime = 0;
+                timer.setText(String.valueOf(--time));
             }
-            if (startMotion) {
-                crosshairX += stepsX;
-                crosshairY += stepsY;
-                fixEdges();
-                crosshair.setPosition(crosshairX, crosshairY);
-            }
-            if (trigger.isShooting) {
-                if (!crosshair.isShooting && cartridge.getBullets() > 0) {
-                    crosshair.shoot();
-                    cartridge.removeBullet();
 
-                    for(TargetController targetController : controllerArray){
-                        currentCollisionPoints = targetController.checkTargetCollision(crosshair.getBounds());
-                        Engine.score += currentCollisionPoints;
-                        if(currentCollisionPoints != 0)
-                            break;
-                    }
-
-                    currentCollisionPoints=0;
-                    if (Engine.score < 0)
-                        Engine.score = 0;
-                    scoreDisplay.setValue(Engine.score);
+            if (time > 0 && !timeup) {
+                for (TargetController targetController : controllerArray) {
+                    targetController.spawnTarget(delta, intervalSeconds);
                 }
-            }
-        }
-        else{
-            timeup=true;
-        }
+                if (startMotion) {
+                    crosshairX += stepsX;
+                    crosshairY += stepsY;
+                    fixEdges();
+                    crosshair.setPosition(crosshairX, crosshairY);
+                }
+                if (trigger.isShooting) {
+                    if (!crosshair.isShooting && cartridge.getBullets() > 0) {
+                        crosshair.shoot();
+                        cartridge.removeBullet();
 
-        if(timeup && !timeupShowed) {
-            timeupShowed=true;
-            showTimeup();
+                        for (TargetController targetController : controllerArray) {
+                            currentCollisionPoints = targetController.checkTargetCollision(crosshair.getBounds());
+                            Engine.score += currentCollisionPoints;
+                            if (currentCollisionPoints != 0)
+                                break;
+                        }
+
+                        currentCollisionPoints = 0;
+                        if (Engine.score < 0)
+                            Engine.score = 0;
+                        scoreDisplay.setValue(Engine.score);
+                    }
+                }
+            } else {
+                timeup = true;
+            }
+
+            if (timeup && !timeupShowed) {
+                timeupShowed = true;
+                showTimeup();
+            }
         }
     }
 
@@ -229,10 +259,13 @@ public class GamePlayController extends Group {
             float percentY;
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                stepsX=0;
-                stepsY=0;
-                startMotion=true;
-                return true;
+                if(!Engine.pause) {
+                    stepsX = 0;
+                    stepsY = 0;
+                    startMotion = true;
+                    return true;
+                }
+                return false;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){

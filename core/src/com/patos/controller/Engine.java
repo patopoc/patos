@@ -32,6 +32,7 @@ import javax.swing.Action;
  */
 public class Engine {
 
+    public static boolean pause=false;
     public LevelManager levelManager;
     private GamePlayController gamePlayController;  //this controller is global because it needs to run on update
     private MenuController menuController;
