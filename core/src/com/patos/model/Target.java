@@ -104,48 +104,39 @@ public class Target extends Group{
 
     public void killTarget(Bullet.BulletType bulletType, float shotX, float shotY){
         Image shot=null;
-        /*switch (type){
-            case Brown:
-                if(bulletType == Bullet.BulletType.Small)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_brown_small"));
-                else if(bulletType == Bullet.BulletType.Large)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_brown_large"));
-                break;
-            case Yellow:
-                if(bulletType == Bullet.BulletType.Small)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_yellow_small"));
-                else if(bulletType == Bullet.BulletType.Large)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_yellow_large"));
-                break;
-            case Colored:*/
-                if(bulletType == Bullet.BulletType.Small)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_grey_small"));
-                else if(bulletType == Bullet.BulletType.Large)
-                    shot= new Image(MainGame.objectAtlas.findRegion("shot_grey_large"));
-        //        break;
-        //}
+            if(bulletType == Bullet.BulletType.Small)
+                shot= new Image(MainGame.objectAtlas.findRegion("shot_grey_small"));
+            else if(bulletType == Bullet.BulletType.Large)
+                shot= new Image(MainGame.objectAtlas.findRegion("shot_grey_large"));
+
         //add shot to specified position
         addActor(shot);
         Vector2 coord= new Vector2(shotX, shotY);
         stageToLocalCoordinates(coord);
         shot.setPosition(coord.x, coord.y);
 
+        final TextFont pointsTag = new TextFont(TextFont.FontSize.Small);
+        pointsTag.setPosition(coord.x, getHeight() - 20);
+
         if(type.isBad()) {
-            final TextFont pointsTag = new TextFont(TextFont.FontSize.Small);
-            pointsTag.setPosition(coord.x, getHeight() - 20);
             pointsTag.setText("+" + type.getPoints());
-            pointsTag.setRotation(10f);
-            pointsTag.addAction(
-                    Actions.sequence(Actions.parallel(Actions.moveBy(0, 50, 1f)
-                            , Actions.fadeOut(1f))
-                            , Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            pointsTag.remove();
-                        }
-                    })));
-            addActor(pointsTag);
         }
+        else{
+            pointsTag.setText("x" + type.getPoints(),"FF0000FF");
+        }
+
+        pointsTag.setRotation(10f);
+        pointsTag.addAction(
+                Actions.sequence(Actions.parallel(Actions.moveBy(0, 50, 1f)
+                        , Actions.fadeOut(1f))
+                        , Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        pointsTag.remove();
+                    }
+                })));
+        addActor(pointsTag);
+
         // play killed sound and add points
 
     }

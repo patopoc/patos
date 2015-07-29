@@ -1,6 +1,7 @@
 package com.patos.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.patos.MainGame;
@@ -17,10 +18,15 @@ public class TextFont extends Group {
     private float fontWidth=-1;
     private float fontHeight=-1;
     private FontSize fontSize;
+    private String color="";
     public TextFont(FontSize fontSize){
         this.fontSize=fontSize;
     }
 
+    public void setText(String text, String color){
+        this.color=color;
+        setText(text);
+    }
     public void setText(String text){
         clearChildren();
         //workaround for different bitmap size, take the size of the 0 wich is the fatty one
@@ -65,6 +71,9 @@ public class TextFont extends Group {
             }
 
             if(character != null) {
+                if(color != "")
+                    character.setColor(Color.valueOf(color));
+
                 addActor(character);
                 setSize(character.getWidth() * i+1, character.getHeight());
                 character.setPosition(fontWidth * i, 0);

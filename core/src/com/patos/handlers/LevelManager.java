@@ -9,8 +9,6 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.patos.MainGame;
 
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 /**
  * Created by steve on 27/07/2015.
