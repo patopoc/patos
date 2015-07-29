@@ -23,6 +23,8 @@ import com.patos.model.GunTrigger;
 import com.patos.model.CounterDisplay;
 import com.patos.model.TextFont;
 
+import java.security.acl.Group;
+
 import javax.swing.Action;
 
 /**
@@ -31,9 +33,8 @@ import javax.swing.Action;
 public class Engine {
 
     public LevelManager levelManager;
-    private GamePlayController gamePlayController;
+    private GamePlayController gamePlayController;  //this controller is global because it needs to run on update
     private MenuController menuController;
-    private LevelsController levelsController;
     private int ducksNum;
     private float duckIntervalSec;
     private int targetsNum;
@@ -66,7 +67,7 @@ public class Engine {
             MainGame.stage.addActor(gamePlayController);
         }
         else if(controllerName.equals("levels")){
-            levelsController= new LevelsController(this, "text", "text","text_cross");
+            LevelsController levelsController= new LevelsController(this, "text", "text","text_cross");
             levelsController.createLevelsGrid(3, 400, 400);
             levelsController.setPosition(MainGame.worldWidth/2 - levelsController.getWidth()/2,
                                          -levelsController.getHeight(),
@@ -74,6 +75,15 @@ public class Engine {
                                          MainGame.worldHeight/2 - levelsController.getHeight()/2);
 
             MainGame.stage.addActor(levelsController);
+        }
+        else if(controllerName.equals("score")){
+            ScoreController scoreController = new ScoreController(this);
+            scoreController.setPosition(MainGame.worldWidth/2 - scoreController.getWidth()/2,
+                                        -scoreController.getHeight(),
+                                        MainGame.worldWidth/2 - scoreController.getWidth()/2,
+                                        MainGame.worldHeight/2- scoreController.getHeight()/2);
+
+            MainGame.stage.addActor(scoreController);
         }
     }
 

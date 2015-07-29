@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.patos.MainGame;
 import com.patos.handlers.Level;
@@ -14,7 +15,7 @@ import com.patos.model.HUDButton;
 /**
  * Created by steve on 27/07/2015.
  */
-public class LevelsController extends Group{
+public class LevelsController extends Table {
 
     private Array<HUDButton> levelButtons;
     private Array<Level> levels;
@@ -27,6 +28,9 @@ public class LevelsController extends Group{
     private float gridCellHeight;
 
     public LevelsController(final Engine engine, String iconEnabledDownRoot, String iconEnabledUpRoot, String iconDisabledRoot){
+        if(MainGame.debug)
+            setDebug(true);
+
         levels= engine.levelManager.getLevels();
         this.engine= engine;
         this.iconDisabledRoot= iconDisabledRoot;
@@ -39,6 +43,7 @@ public class LevelsController extends Group{
         float currentRowY= height;
         setWidth(width);
         setHeight(height);
+        top();
 
         gridCellWidth= width/cols;
         gridCellHeight=gridCellWidth;
@@ -79,13 +84,14 @@ public class LevelsController extends Group{
 
             }
 
-            addActor(levelButton);
+            add(levelButton).expandX();
 
-            levelButton.setPosition(currentCol * gridCellWidth, currentRowY);
+            //levelButton.setPosition(currentCol * gridCellWidth, currentRowY);
             currentCol++;
             if(currentCol >= cols) {
                 currentCol = 0;
                 currentRowY -= gridCellHeight;
+                row();
             }
         }
     }

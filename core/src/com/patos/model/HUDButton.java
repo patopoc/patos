@@ -50,22 +50,16 @@ public class HUDButton extends Actor{
         addListener(listener);
     }
 
-    public void setPosition(float x, float y){
-        super.setPosition(x,y);
-        this.x=x;
-        this.y=y;
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha){
         if(isPressed){
-            batch.draw(MainGame.hudAtlas.findRegion(onDownImage), x, y);
+            batch.draw(MainGame.hudAtlas.findRegion(onDownImage), getX(), getY());
         }
         else{
             if(imageIndex != -1)
-                batch.draw(MainGame.hudAtlas.findRegion(onUpImage,imageIndex), x, y);
+                batch.draw(MainGame.hudAtlas.findRegion(onUpImage,imageIndex), getX(), getY());
             else
-                batch.draw(MainGame.hudAtlas.findRegion(onUpImage), x, y);
+                batch.draw(MainGame.hudAtlas.findRegion(onUpImage), getX(), getY());
         }
 
         if(MainGame.debug) {

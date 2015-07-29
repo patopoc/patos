@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.patos.MainGame;
 import com.patos.model.Bullet;
 import com.patos.model.Cartridge;
@@ -30,10 +31,9 @@ public class GamePlayController extends Group {
 
     public boolean isActive=false;
 
-    private TargetController duckController;
     private String duckControllerGroup="duck";
-    private TargetController boardController;
     private String boardControllerGroup= "board";
+    private Array<TargetController> controllerArray;
     private int time=-1;
     private float accumTime;
     TextFont timer;
@@ -57,11 +57,17 @@ public class GamePlayController extends Group {
     private boolean timeup=false;
     private boolean timeupShowed=false;
     private boolean gameIsRunning=false;
+    private Engine engine;
+    private int currentCollisionPoints=0;
 
 
     public GamePlayController(Engine engine, float duckIntervalSec, int targetPositions, float shotDuration){
-        duckController= new TargetController(engine, "targettypes.json",duckControllerGroup);
-        boardController= new TargetController(engine,"targettypes.json",boardControllerGroup, targetPositions);
+        this.engine= engine;
+        controllerArray= new Array<TargetController>();
+        TargetController duckController= new TargetController(engine, "targettypes.json",duckControllerGroup);
+        controllerArray.add(duckController);
+        TargetController boardController= new TargetController(engine,"targettypes.json",boardControllerGroup, targetPositions);
+        controllerArray.add(boardController);
         intervalSeconds= duckIntervalSec;
         crosshair= new Crosshair(shotDuration);
         time= engine.levelManager.getLevels().get(engine.levelManager.getCurrentLevel()).time;
@@ -104,8 +110,9 @@ public class GamePlayController extends Group {
         }
 
         if(time > 0 && !timeup) {
-            duckController.spawnTarget(delta, intervalSeconds,duckControllerGroup);
-            boardController.spawnTarget(delta, intervalSeconds, boardControllerGroup);
+            for(TargetController targetController : controllerArray){
+                targetController.spawnTarget(delta, intervalSeconds);
+            }
             if (startMotion) {
                 crosshairX += stepsX;
                 crosshairY += stepsY;
@@ -116,8 +123,15 @@ public class GamePlayController extends Group {
                 if (!crosshair.isShooting && cartridge.getBullets() > 0) {
                     crosshair.shoot();
                     cartridge.removeBullet();
-                    Engine.score += duckController.checkTargetCollision(crosshair.getBounds());
-                    Engine.score += boardController.checkTargetCollision(crosshair.getBounds());
+
+                    for(TargetController targetController : controllerArray){
+                        currentCollisionPoints = targetController.checkTargetCollision(crosshair.getBounds());
+                        Engine.score += currentCollisionPoints;
+                        if(currentCollisionPoints != 0)
+                            break;
+                    }
+
+                    currentCollisionPoints=0;
                     if (Engine.score < 0)
                         Engine.score = 0;
                     scoreDisplay.setValue(Engine.score);
@@ -190,6 +204,8 @@ public class GamePlayController extends Group {
             @Override
             public void run() {
                 Gdx.app.log("opa", "vya");
+                engine.show("score");
+                remove();
             }
         })));
         addActor(timeupImage);

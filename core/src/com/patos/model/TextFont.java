@@ -29,7 +29,8 @@ public class TextFont extends Group {
             fontHeight= MainGame.hudAtlas.findRegion("text_0_small").getRegionHeight();
         }
         else if(fontSize == FontSize.Normal){
-
+            fontWidth= MainGame.hudAtlas.findRegion("text",0).getRegionWidth();
+            fontHeight= MainGame.hudAtlas.findRegion("text",0).getRegionHeight();
         }
 
         for(int i= 0; i< text.length(); i++){
@@ -51,6 +52,10 @@ public class TextFont extends Group {
                     character= new Image(MainGame.hudAtlas.findRegion("text_plus"));
                 else if(fontSize == FontSize.Small)
                     character= new Image(MainGame.hudAtlas.findRegion("text_plus_small"));
+            }
+            else if(text.charAt(i) == ' '){
+                character= new Image();
+                character.setSize(fontWidth, fontHeight);
             }
             else{
                 if(fontSize == FontSize.Normal)

@@ -79,16 +79,16 @@ public class TargetController {
     }
 
     // spawn a target every x seconds specified by intervalSeconds
-    public void spawnTarget(float delta, float intervalSeconds, String groupLayer){
+    public void spawnTarget(float delta, float intervalSeconds){
         elapsedTime += delta;
         if(elapsedTime >= intervalSeconds && targetsSpawned < targets.size){
             elapsedTime=0;
-            if(groupLayer.equals("duck")) {
+            if(targetGroup.equals("duck")) {
                 //spawn target
                 MainGame.ducksLayer.addActor(targets.get(targetsSpawned));
                 targetsSpawned++;
             }
-            else if(groupLayer.equals("board")){
+            else if(targetGroup.equals("board")){
                 int selectPos= MathUtils.random(1,targetPositions-1);
                 Target target= targets.get(targetsSpawned);
                 targetsSpawned++;
