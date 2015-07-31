@@ -30,9 +30,11 @@ public class TargetController {
     private float timeSeed;
     private Array<Vector2> availablePositions;
     private int targetPositions;
+    private Array<Target> targetsOnCollision;
 
     public TargetController(Engine engine, String targetTypesFile, String targetGroup){
         targets= new Array<Target>();
+        targetsOnCollision= new Array<Target>();
         this.engine=engine;
         this.targetGroup= targetGroup;
         loadTargetTypes(targetTypesFile);
@@ -140,18 +142,28 @@ public class TargetController {
 
     public int checkTargetCollision(Rectangle bounds){
         int points=0;
+        int nearestTarget=0;
+        targetsOnCollision.clear();
         Rectangle intersection= new Rectangle();
         for(Target target : targets){
             if(bounds.overlaps(target.getBounds())){
-                Funcs.intersect(bounds, target.getBounds(),intersection);
-                target.killTarget(Bullet.BulletType.Small, intersection.x, intersection.y);
-                engine.soundManager.playSound(target.type.getDeadSound(),false,1);
-                if(target.type.isBad())
-                    points= target.type.getPoints();
-                else
-                    points= -target.type.getPoints();
-                break;
+                Funcs.intersect(bounds, target.getBounds(), intersection);
+                targetsOnCollision.add(target);
             }
+        }
+
+        for(int i=0; i< targetsOnCollision.size;i++){
+            if(targetsOnCollision.get(i).getZIndex() > nearestTarget)
+                nearestTarget=i;
+        }
+
+        if(targetsOnCollision.size > 0) {
+            targetsOnCollision.get(nearestTarget).killTarget(Bullet.BulletType.Small, intersection.x, intersection.y);
+            engine.soundManager.playSound(targetsOnCollision.get(nearestTarget).type.getDeadSound(), false, 1);
+            if (targetsOnCollision.get(nearestTarget).type.isBad())
+                points = targetsOnCollision.get(nearestTarget).type.getPoints();
+            else
+                points = -targetsOnCollision.get(nearestTarget).type.getPoints();
         }
         return points;
     }

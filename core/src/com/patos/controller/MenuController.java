@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.patos.MainGame;
 import com.patos.model.HUDButton;
@@ -18,18 +19,20 @@ public class MenuController extends Group{
     private boolean isActive=false;
 
     public MenuController(final Engine engine){
-        playButton= new HUDButton("btn_play_normal", "btn_play_clicked","button.mp3");
+        playButton= new HUDButton("btn_play_clicked", "btn_play_normal", "btn_play_selected", "button.mp3");
         this.engine= engine;
         playButton.setInputListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 engine.soundManager.playSound(playButton.getClickSound(),false,1);
                 playButton.isPressed=true;
+                playButton.setState(HUDButton.State.Clicked);
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
                 if(isActive) {
                     isActive=false;
                     playButton.isPressed = false;
+                    playButton.setState(HUDButton.State.Normal);
                     outAction(new Runnable() {
                         @Override
                         public void run() {
@@ -41,6 +44,7 @@ public class MenuController extends Group{
             }
         });
         setSize(playButton.getWidth(), playButton.getHeight());
+        playButton.setTouchable(Touchable.disabled);
         addActor(playButton);
     }
 
@@ -50,6 +54,7 @@ public class MenuController extends Group{
             @Override
             public void run() {
                 isActive=true;
+                playButton.setTouchable(Touchable.enabled);
             }
         });
 

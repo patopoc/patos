@@ -97,7 +97,7 @@ public class Target extends Group{
             pointsTag.setText("+" + type.getPoints());
         }
         else{
-            pointsTag.setText("x" + type.getPoints(),"FF0000FF");
+            pointsTag.setText("-" + type.getPoints(),"FF0000FF");
         }
 
         pointsTag.setRotation(10f);

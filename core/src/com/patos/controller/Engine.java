@@ -56,26 +56,30 @@ public class Engine {
         this.targetPositions= targetPositions;
         this.shotDuration= shotDuration;
         soundManager= new SoundManager(this);
-        menuController= new MenuController(this);
-        menuController.setPosition(MainGame.worldWidth/2 - menuController.getWidth()/2,
-                                    -menuController.getHeight(),
-                                    MainGame.worldWidth/2 - menuController.getWidth()/2,
-                                    MainGame.worldHeight/2 - menuController.getHeight()/2);
-        MainGame.stage.addActor(menuController);
         soundManager.loadMusic("music.mp3");
         soundManager.playMusic(true, 0.7f);
+        show("menu");
 
     }
 
     public void show(String controllerName){
+
         if(controllerName.equals("gamePlay")){
             gamePlayController= new GamePlayController(this, duckIntervalSec, targetPositions,shotDuration);
             gamePlayController.isActive=true;
             MainGame.stage.addActor(gamePlayController);
         }
+        else if(controllerName.equals("menu")){
+            menuController= new MenuController(this);
+            menuController.setPosition(MainGame.worldWidth/2 - menuController.getWidth()/2,
+                    -menuController.getHeight(),
+                    MainGame.worldWidth/2 - menuController.getWidth()/2,
+                    MainGame.worldHeight/2 - menuController.getHeight()/2);
+            MainGame.stage.addActor(menuController);
+        }
         else if(controllerName.equals("levels")){
-            LevelsController levelsController= new LevelsController(this, "text", "text","text_cross");
-            levelsController.createLevelsGrid(3, 400, 400);
+            LevelsController levelsController= new LevelsController(this, "level", "level","level_locked");
+            levelsController.createLevelsGrid(3, 500, 400);
             levelsController.setPosition(MainGame.worldWidth/2 - levelsController.getWidth()/2,
                                          -levelsController.getHeight(),
                                          MainGame.worldWidth/2 - levelsController.getWidth()/2,

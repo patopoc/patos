@@ -38,10 +38,13 @@ public class LevelManager {
         levelContent= createJsonContent();
         FileHandle file= Gdx.files.local("levels");
         file.writeString(levelContent, false);
+        updateLevels();
     }
 
     public void updateLevels(){
-
+        levels.clear();
+        levels=null;
+        setLevels();
     }
 
     private String createJsonContent(){
@@ -63,7 +66,7 @@ public class LevelManager {
             content += " \"targets\":[";
             for(LevelTarget levelTarget : l.targets){
                 content += "{\"targetGroup\":\""+levelTarget.targetGroup+"\", ";
-                content += "{\"targetType\":\""+levelTarget.targetType+"\", ";
+                content += "\"targetType\":\""+levelTarget.targetType+"\", ";
                 content += "\"num\":"+levelTarget.num + ",";
                 content += "\"chance\":"+levelTarget.chance + "},";
             }
@@ -116,6 +119,10 @@ public class LevelManager {
 
     public Array<Level> getLevels(){
         return levels;
+    }
+
+    public Level getLevel(int index){
+        return levels.get(index);
     }
 
 

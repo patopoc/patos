@@ -18,6 +18,7 @@ public class TextFont extends Group {
     private float fontWidth=-1;
     private float fontHeight=-1;
     private FontSize fontSize;
+    private float scale=1;
     private String color="";
     public TextFont(FontSize fontSize){
         this.fontSize=fontSize;
@@ -27,6 +28,17 @@ public class TextFont extends Group {
         this.color=color;
         setText(text);
     }
+
+    public void setText(String text, String color, float scale){
+        this.color=color;
+        setText(text, scale);
+    }
+
+    public void setText(String text, float scale){
+        this.scale=scale;
+        setText(text);
+    }
+
     public void setText(String text){
         clearChildren();
         //workaround for different bitmap size, take the size of the 0 wich is the fatty one
@@ -38,6 +50,9 @@ public class TextFont extends Group {
             fontWidth= MainGame.hudAtlas.findRegion("text",0).getRegionWidth();
             fontHeight= MainGame.hudAtlas.findRegion("text",0).getRegionHeight();
         }
+
+        fontWidth *= scale;
+        fontHeight *= scale;
 
         for(int i= 0; i< text.length(); i++){
             Image character=null;
@@ -65,6 +80,12 @@ public class TextFont extends Group {
                 else if(fontSize == FontSize.Small)
                     character= new Image(MainGame.hudAtlas.findRegion("text_slash_small"));
             }
+            else if(text.charAt(i) == '-'){
+                if(fontSize == FontSize.Normal)
+                    character= new Image(MainGame.hudAtlas.findRegion("text_minus"));
+                else if(fontSize == FontSize.Small)
+                    character= new Image(MainGame.hudAtlas.findRegion("text_minus_small"));
+            }
             else if(text.charAt(i) == ' '){
                 character= new Image();
                 character.setSize(fontWidth, fontHeight);
@@ -81,7 +102,9 @@ public class TextFont extends Group {
                     character.setColor(Color.valueOf(color));
 
                 addActor(character);
-                setSize(character.getWidth() * i+1, character.getHeight());
+                //setSize(character.getWidth() * i+1, character.getHeight());
+                character.setSize(fontWidth, fontHeight);
+                setSize(fontWidth * (i+1), fontHeight);
                 character.setPosition(fontWidth * i, 0);
             }
         }

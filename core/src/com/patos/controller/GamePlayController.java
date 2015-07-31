@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -60,9 +61,10 @@ public class GamePlayController extends Group {
     private boolean gameIsRunning=false;
     private Engine engine;
     private int currentCollisionPoints=0;
+    private Table buttonContainer;
 
 
-    public GamePlayController(Engine engine, float duckIntervalSec, int targetPositions, float shotDuration){
+    public GamePlayController(final Engine engine, float duckIntervalSec, int targetPositions, float shotDuration){
         this.engine= engine;
         controllerArray= new Array<TargetController>();
         TargetController duckController= new TargetController(engine, "targettypes.json",duckControllerGroup);
@@ -88,7 +90,7 @@ public class GamePlayController extends Group {
 
         trigger= new GunTrigger(engine,shotDuration);
         trigger.setPosition(800, 60);
-        addActor(trigger);
+        //aadActor(trigger);
 
         addActor(crosshair);
         crosshairX = MainGame.worldWidth / 2;
@@ -99,9 +101,10 @@ public class GamePlayController extends Group {
         touchpad.addListener(createJoypadInputListener());
         touchpad.setBounds(20, 20, 140, 140);
         touchpad.setPosition(20, 20);
-        addActor(touchpad);
+        //addActor(touchpad);
 
-        final HUDButton pauseButton= new HUDButton("crosshair_outline_large", "crosshair_red_large");
+        final HUDButton pauseButton= new HUDButton("btn_small_clicked","btn_small_normal","btn_small_selected", "button.mp3");
+        pauseButton.setIcon("icon_pause");
 
         pauseButton.setInputListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -119,14 +122,42 @@ public class GamePlayController extends Group {
                         }
                     });*/
                 Engine.pause = !Engine.pause;
+                if (Engine.pause) {
+                    pauseButton.setIcon("icon_play");
+                } else {
+                    pauseButton.setIcon("icon_pause");
+                }
 
             }
         });
 
-        pauseButton.setPosition(MainGame.worldWidth - pauseButton.getWidth() + 10,
-                                MainGame.worldHeight - pauseButton.getHeight() +10);
+        final HUDButton levelsButton= new HUDButton("btn_small_clicked","btn_small_normal","btn_small_selected", "button.mp3");
+        levelsButton.setIcon("icon_levels");
+        final Engine engineFinal=engine;
+        levelsButton.setInputListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                levelsButton.setState(HUDButton.State.Clicked);
+                levelsButton.isPressed = true;
+                return true;
+            }
 
-        addActor(pauseButton);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (isActive) {
+                    isActive = false;
+                    levelsButton.setState(HUDButton.State.Normal);
+                    levelsButton.isPressed = false;
+                    engineFinal.show("levels");
+                    clearChildren();
+                    remove();
+                }
+            }
+        });
+
+        buttonContainer= new Table();
+        buttonContainer.add(pauseButton).pad(10);
+        buttonContainer.add(levelsButton).pad(10);
+        buttonContainer.setPosition(MainGame.worldWidth / 2 - buttonContainer.getWidth() / 2, 50);
+
 
         readyGo();
     }
@@ -173,6 +204,23 @@ public class GamePlayController extends Group {
 
             if (timeup && !timeupShowed) {
                 timeupShowed = true;
+                int currentLevel=engine.levelManager.getCurrentLevel();
+                int currentPoints= engine.levelManager.getLevel(currentLevel).currentPoints;
+                int maxPoints= engine.levelManager.getLevel(currentLevel).maxPoints;
+
+                if(Engine.score > currentPoints) {
+                    engine.levelManager.getLevel(currentLevel).currentPoints = Engine.score;
+                    if(Engine.score >= maxPoints){
+                        engine.levelManager.getLevel(currentLevel).levelPassed=true;
+                        if(currentLevel + 1 < engine.levelManager.getLevels().size) {
+                            if (!engine.levelManager.getLevel(currentLevel + 1).levelEnabled) {
+                                engine.levelManager.getLevel(currentLevel + 1).levelEnabled = true;
+                            }
+                        }
+                    }
+                    engine.levelManager.saveLevels();
+                }
+
                 showTimeup();
             }
         }
@@ -211,7 +259,11 @@ public class GamePlayController extends Group {
             public void run(){
                 gameIsRunning=true;
                 image.remove();
-                engine.soundManager.playSound("ducks_quacking.mp3",true,1);
+                engine.soundManager.playSound("ducks_quacking.mp3", true, 1);
+                addActor(buttonContainer);
+                addActor(touchpad);
+                addActor(trigger);
+
             }
         };
         seq.addAction(moveToAction);
