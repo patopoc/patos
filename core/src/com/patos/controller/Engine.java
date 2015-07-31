@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.patos.MainGame;
 import com.patos.handlers.LevelManager;
+import com.patos.handlers.SoundManager;
 import com.patos.model.Bullet;
 import com.patos.model.Cartridge;
 import com.patos.model.Crosshair;
@@ -34,6 +35,8 @@ public class Engine {
 
     public static boolean pause=false;
     public LevelManager levelManager;
+    public SoundManager soundManager;
+
     private GamePlayController gamePlayController;  //this controller is global because it needs to run on update
     private MenuController menuController;
     private int ducksNum;
@@ -52,12 +55,15 @@ public class Engine {
         this.targetsNum= targetsNum;
         this.targetPositions= targetPositions;
         this.shotDuration= shotDuration;
+        soundManager= new SoundManager(this);
         menuController= new MenuController(this);
         menuController.setPosition(MainGame.worldWidth/2 - menuController.getWidth()/2,
                                     -menuController.getHeight(),
                                     MainGame.worldWidth/2 - menuController.getWidth()/2,
                                     MainGame.worldHeight/2 - menuController.getHeight()/2);
         MainGame.stage.addActor(menuController);
+        soundManager.loadMusic("music.mp3");
+        soundManager.playMusic(true, 0.7f);
 
     }
 

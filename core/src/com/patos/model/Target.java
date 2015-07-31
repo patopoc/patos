@@ -26,31 +26,6 @@ public class Target extends Group{
 
     private Rectangle bounds;
 
-    /*public enum TargetType{
-        Brown_Bad(6, 10, true), Brown_Normal(6, 10, false), Yellow_Bad(6, 10, true),
-        Yellow_Normal(6, 10, false),Colored(6, 10,true);
-
-        float speed;
-        int points;
-        boolean bad;
-
-        TargetType(float speed, int points, boolean bad){
-            this.speed= speed;
-            this.points= points;
-            this.bad= bad;
-        }
-
-        public float getSpeed(){
-            return speed;
-        }
-
-        public int getPoints(){
-            return points;
-        }
-
-        public boolean isBad() {return bad; }
-    }*/
-
     //public Target(TargetType type, boolean isBad){
     public Target(TargetType type, String groupLayer){
         renderer= new ShapeRenderer();

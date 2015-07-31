@@ -43,4 +43,12 @@ public class TargetType {
         return type;
     }
 
+    public String getNormalSound(){
+        return normalSound;
+    }
+
+    public String getDeadSound(){
+        return deadSound;
+    }
+
 }

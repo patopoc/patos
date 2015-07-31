@@ -86,7 +86,7 @@ public class GamePlayController extends Group {
         cartridge.setPosition(MainGame.worldWidth - 120, 400);
         addActor(cartridge);
 
-        trigger= new GunTrigger();
+        trigger= new GunTrigger(engine,shotDuration);
         trigger.setPosition(800, 60);
         addActor(trigger);
 
@@ -194,6 +194,7 @@ public class GamePlayController extends Group {
             @Override
             public void run() {
                 image.setDrawable(new TextureRegionDrawable(MainGame.hudAtlas.findRegion("text_go")));
+                engine.soundManager.playSound("go.mp3",false,1);
             }
         };
 
@@ -210,6 +211,7 @@ public class GamePlayController extends Group {
             public void run(){
                 gameIsRunning=true;
                 image.remove();
+                engine.soundManager.playSound("ducks_quacking.mp3",true,1);
             }
         };
         seq.addAction(moveToAction);
@@ -221,6 +223,7 @@ public class GamePlayController extends Group {
         image.addAction(seq);
 
         addActor(image);
+        engine.soundManager.playSound("ready.mp3",false,1);
     }
 
     private void showTimeup(){

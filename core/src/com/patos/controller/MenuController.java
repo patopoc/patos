@@ -18,10 +18,11 @@ public class MenuController extends Group{
     private boolean isActive=false;
 
     public MenuController(final Engine engine){
-        playButton= new HUDButton("crosshair_outline_large", "crosshair_red_large");
+        playButton= new HUDButton("btn_play_normal", "btn_play_clicked","button.mp3");
         this.engine= engine;
         playButton.setInputListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                engine.soundManager.playSound(playButton.getClickSound(),false,1);
                 playButton.isPressed=true;
                 return true;
             }
@@ -39,6 +40,7 @@ public class MenuController extends Group{
                 }
             }
         });
+        setSize(playButton.getWidth(), playButton.getHeight());
         addActor(playButton);
     }
 

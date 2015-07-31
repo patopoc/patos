@@ -15,11 +15,18 @@ import com.patos.controller.Engine;
  */
 public class GunTrigger extends Actor{
     public boolean isShooting=false;
+
+    private Engine engine;
     private float x=0;
     private float y=0;
+    private float shotDuration;
+    private float time=0;
+    private boolean recharging=false;
 
-    public GunTrigger() {
+    public GunTrigger(Engine engine, float shotDuration) {
         super();
+        this.engine=engine;
+        this.shotDuration= shotDuration/2;
         setWidth(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionWidth());
         setHeight(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionHeight());
         setBounds(0, 0, getWidth(), getHeight());
@@ -32,13 +39,16 @@ public class GunTrigger extends Actor{
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 if(!Engine.pause) {
-                    isShooting = true;
-                    return true;
+                    if(!isShooting) {
+                        engine.soundManager.playSound("gun_firing.mp3", false, 1);
+                        isShooting = true;
+                        return true;
+                    }
                 }
                 return false;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
-                isShooting=false;
+                //isShooting=false;
             }
 
         };
@@ -61,6 +71,24 @@ public class GunTrigger extends Actor{
         }
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        time += delta;
+        if (isShooting && time <= shotDuration){
+            if (time >= shotDuration / 2 && !recharging) {
+                recharging=true;
+                engine.soundManager.playSound("gun_recharging.mp3",false,1);
+
+            }
+        }
+        else{
+            time=0;
+            isShooting=false;
+            recharging=false;
+        }
+
+    }
     //@Override
     //public Actor hit(float arg0, float arg1, boolean flag){
     //    return this;

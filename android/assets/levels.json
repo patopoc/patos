@@ -1,5 +1,5 @@
 [ {"levelPassed":false, "levelEnabled":true,"maxPoints":10, "currentPoints":0, "stars":0, "time":100,
-   "targets":[{"targetGroup":"duck", "targetType":"brown", "num":5, "chance":90},
+   "targets":[{"targetGroup":"duck", "targetType":"brown_scream", "num":5, "chance":90},
               {"targetGroup":"duck", "targetType":"brown_bad", "num":5, "chance":90},
               {"targetGroup":"duck", "targetType":"yellow", "num":5, "chance":70},
               {"targetGroup":"duck", "targetType":"yellow_bad", "num":5, "chance":70},

@@ -27,7 +27,7 @@ public class ScoreController extends Table{
         add(scoreTitle);
         row();
         TextFont score= new TextFont(TextFont.FontSize.Small);
-        score.setText("" + Engine.score + " + " + engine.levelManager.getLevels().
+        score.setText("" + Engine.score + "/" + engine.levelManager.getLevels().
                 get(engine.levelManager.getCurrentLevel()).maxPoints);
         add(score);
         row();

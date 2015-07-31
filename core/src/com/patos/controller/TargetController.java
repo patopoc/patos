@@ -83,19 +83,21 @@ public class TargetController {
         elapsedTime += delta;
         if(elapsedTime >= intervalSeconds && targetsSpawned < targets.size){
             elapsedTime=0;
+            Target target=targets.get(targetsSpawned);
+            targetsSpawned++;
             if(targetGroup.equals("duck")) {
                 //spawn target
-                MainGame.ducksLayer.addActor(targets.get(targetsSpawned));
-                targetsSpawned++;
+                MainGame.ducksLayer.addActor(target);
             }
             else if(targetGroup.equals("board")){
-                int selectPos= MathUtils.random(1,targetPositions-1);
-                Target target= targets.get(targetsSpawned);
-                targetsSpawned++;
+                int selectPos = MathUtils.random(1,targetPositions-1);
+                //target= targets.get(targetsSpawned);
+                //targetsSpawned++;
                 target.setPosition(availablePositions.get(selectPos - 1).x
                         , availablePositions.get(selectPos - 1).y);
                 MainGame.targetsLayer.addActor(target);
             }
+            engine.soundManager.playSound(target.type.getNormalSound(),false, 1);
         }
     }
 
@@ -142,7 +144,8 @@ public class TargetController {
         for(Target target : targets){
             if(bounds.overlaps(target.getBounds())){
                 Funcs.intersect(bounds, target.getBounds(),intersection);
-                target.killTarget(Bullet.BulletType.Small,intersection.x, intersection.y);
+                target.killTarget(Bullet.BulletType.Small, intersection.x, intersection.y);
+                engine.soundManager.playSound(target.type.getDeadSound(),false,1);
                 if(target.type.isBad())
                     points= target.type.getPoints();
                 else

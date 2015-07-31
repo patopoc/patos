@@ -18,11 +18,22 @@ public class HUDButton extends Actor{
     public boolean isPressed=false;
     private String onDownImage;
     private String onUpImage;
+    private String clickSound;
     private int imageIndex=-1;
     private float x=0;
     private float y=0;
 
     private ShapeRenderer renderer;
+
+    public HUDButton(String onDownImage, String onUpImage, String onClickSound){
+        this(onDownImage,onUpImage);
+        clickSound= onClickSound;
+    }
+
+    public HUDButton(String onDownImage, String onUpImage, int imageIndex, String onClickSound){
+        this(onDownImage,onUpImage, imageIndex);
+        clickSound= onClickSound;
+    }
 
     public HUDButton(String onDownImage, String onUpImage) {
         super();
@@ -44,6 +55,10 @@ public class HUDButton extends Actor{
         setHeight(MainGame.hudAtlas.findRegion(onUpImage,index).getRegionHeight());
         setBounds(0, 0, getWidth(), getHeight());
         setTouchable(Touchable.enabled);
+    }
+
+    public String getClickSound(){
+        return clickSound;
     }
 
     public void setInputListener(InputListener listener){

@@ -59,6 +59,12 @@ public class TextFont extends Group {
                 else if(fontSize == FontSize.Small)
                     character= new Image(MainGame.hudAtlas.findRegion("text_plus_small"));
             }
+            else if(text.charAt(i) == '/'){
+                if(fontSize == FontSize.Normal)
+                    character= new Image(MainGame.hudAtlas.findRegion("text_slash"));
+                else if(fontSize == FontSize.Small)
+                    character= new Image(MainGame.hudAtlas.findRegion("text_slash_small"));
+            }
             else if(text.charAt(i) == ' '){
                 character= new Image();
                 character.setSize(fontWidth, fontHeight);

@@ -51,13 +51,13 @@ public class LevelsController extends Table {
         for(int i=0; i < levels.size; i++){
             final HUDButton levelButton;
             if(levels.get(i).levelEnabled){
-                levelButton= new HUDButton(iconEnabledDownRoot, iconEnabledUpRoot, i);
+                levelButton= new HUDButton(iconEnabledDownRoot, iconEnabledUpRoot, i,"button.mp3");
                 final int currentLevel=i;
 
                 levelButton.setInputListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         Gdx.app.log("boton","down");
-
+                        engine.soundManager.playSound(levelButton.getClickSound(),false,1);
                         levelButton.isPressed = true;
                         return true;
                     }
