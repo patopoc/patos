@@ -38,14 +38,8 @@ public class GunTrigger extends Actor{
         InputListener listener= new InputListener(){
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                if(!Engine.pause) {
-                    if(!isShooting) {
-                        engine.soundManager.playSound("gun_firing.mp3", false, 1);
-                        isShooting = true;
-                        return true;
-                    }
-                }
-                return false;
+
+                return shoot();
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
                 //isShooting=false;
@@ -55,6 +49,16 @@ public class GunTrigger extends Actor{
         return listener;
     }
 
+    public boolean shoot(){
+        if(!Engine.pause) {
+            if(!isShooting) {
+                engine.soundManager.playSound("gun_firing.mp3", false, 1);
+                isShooting = true;
+                return true;
+            }
+        }
+        return false;
+    }
     public void setPosition(float x, float y){
         super.setPosition(x,y);
         this.x=x;

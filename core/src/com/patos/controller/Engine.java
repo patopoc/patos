@@ -37,7 +37,7 @@ public class Engine {
     public LevelManager levelManager;
     public SoundManager soundManager;
 
-    private GamePlayController gamePlayController;  //this controller is global because it needs to run on update
+    public GamePlayController gamePlayController;  //this controller is global because it needs to run on update
     private MenuController menuController;
     private int ducksNum;
     private float duckIntervalSec;

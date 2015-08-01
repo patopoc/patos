@@ -89,7 +89,10 @@ public class GamePlayController extends Group {
         addActor(cartridge);
 
         trigger= new GunTrigger(engine,shotDuration);
-        trigger.setPosition(800, 60);
+        if(MainGame.forOuya)
+            trigger.setPosition(800, MainGame.worldHeight);
+        else
+            trigger.setPosition(800, 60);
         //aadActor(trigger);
 
         addActor(crosshair);
@@ -100,7 +103,10 @@ public class GamePlayController extends Group {
         touchpad= createTouchpad();
         touchpad.addListener(createJoypadInputListener());
         touchpad.setBounds(20, 20, 140, 140);
-        touchpad.setPosition(20, 20);
+        if(MainGame.forOuya)
+            touchpad.setPosition(20, MainGame.worldHeight);
+        else
+            touchpad.setPosition(20, 20);
         //addActor(touchpad);
 
         final HUDButton pauseButton= new HUDButton("btn_small_clicked","btn_small_normal","btn_small_selected", "button.mp3");
@@ -363,5 +369,30 @@ public class GamePlayController extends Group {
         else if(crosshairY >= endY){
             crosshairY= endY;
         }
+    }
+
+    public void ouyaControllerMove(float movX, float movY){
+
+        if(movX > joypadThreshold){
+            stepsX=stepSize;
+        }
+        if(movX < -joypadThreshold){
+            stepsX= -stepSize;
+        }
+
+        if(movY > joypadThreshold){
+            stepsY = stepSize;
+        }
+        if(movY < -joypadThreshold){
+            stepsY= -stepSize;
+        }
+    }
+
+    public void ouyaControllerShoot(){
+        trigger.shoot();
+    }
+
+    public void ouyaControllerReload(){
+
     }
 }

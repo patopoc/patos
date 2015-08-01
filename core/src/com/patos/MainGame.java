@@ -15,9 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.patos.controller.Engine;
+import com.patos.interfaces.OuyaInterface;
 import com.patos.model.Curtain;
 
-public class MainGame extends ApplicationAdapter {
+public class MainGame extends ApplicationAdapter implements OuyaInterface{
 
     private final float SCALE= 1f;
 
@@ -30,6 +31,7 @@ public class MainGame extends ApplicationAdapter {
     private float shotDuration=.5f;
 
     public static boolean debug=true;
+    public static boolean forOuya=false;
     public static int time=120;
     public static OrthographicCamera mainCam;
     public static float worldWidth=900f;
@@ -40,6 +42,7 @@ public class MainGame extends ApplicationAdapter {
     public static Stage stage;
     public static Group ducksLayer;
     public static Group targetsLayer;
+    public static boolean selectAction=false;
 
 	@Override
 	public void create () {
@@ -182,5 +185,25 @@ public class MainGame extends ApplicationAdapter {
                 currentX += region.getRegionWidth()-40;
             }
         }
+    }
+
+    @Override
+    public void shootGun() {
+        engine.gamePlayController.ouyaControllerShoot();
+    }
+
+    @Override
+    public void reloadGun() {
+
+    }
+
+    @Override
+    public void moveCrosshair(float x, float y) {
+        engine.gamePlayController.ouyaControllerMove(x,y);
+    }
+
+    @Override
+    public void select() {
+        selectAction=true;
     }
 }
