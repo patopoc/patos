@@ -32,7 +32,7 @@ public class Crosshair extends Actor{
         setWidth(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionWidth());
         setHeight(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionHeight());
         setBounds(0, 0, getWidth(), getHeight());
-        bounds=new Rectangle(getX(), getY(), getWidth(), getHeight());
+        bounds=new Rectangle(0,0,getWidth() * 0.1f, getHeight() * 0.1f);
         //setTouchable(Touchable.enabled);
         //addListener(createInputListener());
     }
@@ -72,14 +72,15 @@ public class Crosshair extends Actor{
     @Override
     public void draw(Batch batch, float parentAlpha){
         time += Gdx.graphics.getDeltaTime();
-        bounds.setPosition(x, y);
+        bounds.setPosition((getWidth()/2 - bounds.getWidth()/2) + x,
+                (getHeight()/2 - bounds.getHeight()/2) + y);
         if(isShooting && time <= shotDuration){
-            batch.draw(MainGame.hudAtlas.findRegion("crosshair_red_small"), x, y);
+            batch.draw(MainGame.hudAtlas.findRegion("crosshair_red_large"), x, y);
         }
         else{
             time=0;
             isShooting=false;
-            batch.draw(MainGame.hudAtlas.findRegion("crosshair_outline_small"), x, y);
+            batch.draw(MainGame.hudAtlas.findRegion("crosshair_outline_large"), x, y);
         }
 
         if(MainGame.debug) {

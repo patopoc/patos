@@ -136,6 +136,14 @@ public class ScoreController extends Group{
     }
 
     private void inAction(float x, float y, Runnable action){
+        int stars= engine.levelManager.getLevel(engine.levelManager.getCurrentLevel()).stars;
+        if(stars == 0 )
+            engine.soundManager.playSound("laughter_man.mp3",false, 1);
+        else if(stars > 0 && stars < 3)
+            engine.soundManager.playSound("score_applause.mp3",false, 1);
+        else if(stars == 3){
+            engine.soundManager.playSound("cheering.mp3",false, 1);
+        }
         addAction(Actions.sequence(Actions.moveTo(x,y,1f),Actions.run(action)));
     }
 }

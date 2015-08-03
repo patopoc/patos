@@ -1,9 +1,9 @@
-[{"type":"brown", "speed": 10,"points": 10, "bad":false, "imageName":"duck_outline_brown", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"brown_scream", "speed": 10,"points": 10, "bad":false, "imageName":"duck_outline_brown", "normalSound":"", "deadSound":"scream_man.mp3"},
-  {"type":"brown_bad", "speed": 6,"points": 10, "bad":true, "imageName":"duck_outline_target_brown", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"yellow", "speed": 4,"points": 20, "bad":false, "imageName":"duck_outline_yellow", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"yellow_bad", "speed": 4,"points": 20, "bad":true, "imageName":"duck_outline_target_yellow", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"colored", "speed": 2 ,"points": 30, "bad":false, "imageName":"duck_outline_white", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"colored_bad", "speed": 2 ,"points": 30, "bad":true, "imageName":"duck_outline_target_white", "normalSound":"", "deadSound":"duck_death.mp3"},
-  {"type":"board_red", "speed": 6 ,"points": 20, "bad":true, "imageName":"target_red1_outline", "normalSound":"", "deadSound":""},
-  {"type":"board_colored", "speed": 3 ,"points": 40, "bad":true, "imageName":"target_colored_outline", "normalSound":"", "deadSound":""}]
+[{"type":"brown", "collisionMask":"duck", "speed": 10,"points": 10, "bad":false, "imageName":"duck_outline_brown", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"brown_scream", "collisionMask":"duck", "speed": 10,"points": 10, "bad":false, "imageName":"duck_outline_brown", "normalSound":"", "deadSound":"scream_man.mp3"},
+  {"type":"brown_bad", "collisionMask":"duck", "speed": 6,"points": 10, "bad":true, "imageName":"duck_outline_target_brown", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"yellow", "collisionMask":"duck", "speed": 4,"points": 20, "bad":false, "imageName":"duck_outline_yellow", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"yellow_bad", "collisionMask":"duck", "speed": 4,"points": 20, "bad":true, "imageName":"duck_outline_target_yellow", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"colored", "collisionMask":"duck", "speed": 2 ,"points": 30, "bad":false, "imageName":"duck_outline_white", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"colored_bad", "collisionMask":"duck", "speed": 2 ,"points": 30, "bad":true, "imageName":"duck_outline_target_white", "normalSound":"", "deadSound":"duck_death.mp3"},
+  {"type":"board_red", "collisionMask":"board", "speed": 6 ,"points": 20, "bad":true, "imageName":"target_red1_outline", "normalSound":"", "deadSound":""},
+  {"type":"board_colored", "collisionMask":"board", "speed": 3 ,"points": 40, "bad":true, "imageName":"target_colored_outline", "normalSound":"", "deadSound":""}]

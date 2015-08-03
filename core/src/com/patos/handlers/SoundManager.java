@@ -43,4 +43,14 @@ public class SoundManager {
             sfx.get(soundFile).setVolume(id, vol);
         }
     }
+
+    public void stopSound(String soundFile){
+        if(soundFile != null && !soundFile.equals("")) {
+            if (sfx.containsKey(soundFile)) {
+                sfx.get(soundFile).stop();
+                sfx.get(soundFile).dispose();
+                sfx.remove(soundFile);
+            }
+        }
+    }
 }

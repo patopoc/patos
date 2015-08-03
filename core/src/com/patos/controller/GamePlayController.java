@@ -51,6 +51,7 @@ public class GamePlayController extends Group {
     private float stepsX=0;
     private float stepsY=0;
     private boolean startMotion=false;
+    private boolean ouyaJoystickMoving=false;
     private float startX=100;
     private float startY=100;
     private float endX=700;
@@ -180,7 +181,8 @@ public class GamePlayController extends Group {
                 for (TargetController targetController : controllerArray) {
                     targetController.spawnTarget(delta, intervalSeconds);
                 }
-                if (startMotion) {
+                if (startMotion || ouyaJoystickMoving) {
+                    ouyaJoystickMoving=false;
                     crosshairX += stepsX;
                     crosshairY += stepsY;
                     fixEdges();
@@ -228,6 +230,7 @@ public class GamePlayController extends Group {
                 }
 
                 showTimeup();
+                engine.soundManager.stopSound("ducks_quacking.mp3");
             }
         }
     }
@@ -295,12 +298,28 @@ public class GamePlayController extends Group {
             @Override
             public void run() {
                 Gdx.app.log("opa", "vya");
+                engine.levelManager.getLevel(
+                        engine.levelManager.getCurrentLevel()).stars= calculteStars();
                 engine.show("score");
                 remove();
             }
         })));
         addActor(timeupImage);
 
+    }
+
+    private int calculteStars(){
+        int stars=0;
+        int currentPoints= engine.levelManager.getLevel(engine.levelManager.getCurrentLevel()).currentPoints;
+        int maxPoints= engine.levelManager.getLevel(engine.levelManager.getCurrentLevel()).maxPoints;
+        int difference= maxPoints - currentPoints;
+        if(currentPoints >= maxPoints)
+            stars=3;
+        else if(difference < 10)
+            stars=2;
+        else if(currentPoints > maxPoints /2)
+            stars=1;
+        return stars;
     }
 
     private Touchpad createTouchpad(){
@@ -373,6 +392,8 @@ public class GamePlayController extends Group {
 
     public void ouyaControllerMove(float movX, float movY){
 
+        ouyaJoystickMoving=true;
+        Gdx.app.log("ouya stick",movX+ " , "+movY);
         if(movX > joypadThreshold){
             stepsX=stepSize;
         }
@@ -380,10 +401,10 @@ public class GamePlayController extends Group {
             stepsX= -stepSize;
         }
 
-        if(movY > joypadThreshold){
+        if(movY < joypadThreshold){
             stepsY = stepSize;
         }
-        if(movY < -joypadThreshold){
+        if(movY > -joypadThreshold){
             stepsY= -stepSize;
         }
     }

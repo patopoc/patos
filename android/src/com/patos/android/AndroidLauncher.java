@@ -65,6 +65,10 @@ public class AndroidLauncher extends AndroidApplication {
         float leftX= event.getAxisValue(OuyaController.AXIS_LS_X);
         float leftY= event.getAxisValue(OuyaController.AXIS_LS_Y);
 
+        //if(leftX*leftX + leftY*leftY < OuyaController.STICK_DEADZONE * OuyaController.STICK_DEADZONE ){
+        //    leftX = leftY = 0f;
+        //}
+
         // move crosshair
         callBack.moveCrosshair(leftX,leftY);
 

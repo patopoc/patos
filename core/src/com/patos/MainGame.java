@@ -30,7 +30,7 @@ public class MainGame extends ApplicationAdapter implements OuyaInterface{
     private int targetPositions=4;
     private float shotDuration=.5f;
 
-    public static boolean debug=true;
+    public static boolean debug=false;
     public static boolean forOuya=false;
     public static int time=120;
     public static OrthographicCamera mainCam;

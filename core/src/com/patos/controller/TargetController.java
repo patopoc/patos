@@ -56,7 +56,9 @@ public class TargetController {
                     targetType= levelTargets.get(selectType).targetType;
                     levelTargets.get(selectType).num--;
                 }
+
             }
+
             //get targetType according specifications in file
 
             targets.add(new Target(getTargetType(targetType), targetGroup));
@@ -114,8 +116,8 @@ public class TargetController {
 
     public void loadLevelTargets(){
         levelTargets= new Array<LevelTarget>();
-        Array<LevelTarget> fullLevelTarget= engine.levelManager.getLevels().get(engine.levelManager
-                .getCurrentLevel()).targets;
+        Array<LevelTarget> fullLevelTarget= new Array<LevelTarget>(engine.levelManager.getLevels().get(engine.levelManager
+                .getCurrentLevel()).targets);
         for(LevelTarget levelTarget : fullLevelTarget){
             if(levelTarget.targetGroup.equals(targetGroup))
                 levelTargets.add(levelTarget);
@@ -129,6 +131,7 @@ public class TargetController {
         for(JsonValue jsonValue : jsonTypes){
             TargetType type= new TargetType(
                     jsonValue.getString("type"),
+                    jsonValue.getString("collisionMask"),
                     jsonValue.getFloat("speed"),
                     jsonValue.getInt("points"),
                     jsonValue.getBoolean("bad"),
@@ -146,9 +149,12 @@ public class TargetController {
         targetsOnCollision.clear();
         Rectangle intersection= new Rectangle();
         for(Target target : targets){
-            if(bounds.overlaps(target.getBounds())){
-                Funcs.intersect(bounds, target.getBounds(), intersection);
-                targetsOnCollision.add(target);
+            for(int i=0; i< target.getBounds().size(); i++){
+                if(bounds.overlaps(target.getBounds().getRect(i))){
+                    Funcs.intersect(bounds, target.getBounds().getRect(i), intersection);
+                    targetsOnCollision.add(target);
+                    break;
+                }
             }
         }
 

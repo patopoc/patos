@@ -24,12 +24,13 @@ public class Target extends Group{
     private Image stick;
     private Vector2 targetStageCoord;
 
-    private Rectangle bounds;
+    //private Rectangle bounds;
+    private CompoundRectangle compoundBounds;
 
     //public Target(TargetType type, boolean isBad){
     public Target(TargetType type, String groupLayer){
         renderer= new ShapeRenderer();
-        //this.badTarget= isBad;
+        compoundBounds= new CompoundRectangle();
         this.type= type;
         targetStageCoord= new Vector2();
         targetImage = new Image(MainGame.objectAtlas.findRegion(type.getImageName()));
@@ -69,7 +70,20 @@ public class Target extends Group{
 
         targetImage.setPosition(getWidth() / 2 - targetImage.getWidth() / 2, stick.getHeight() - 5);
         stick.setPosition(getWidth() / 2 - stick.getWidth() / 2, 0);
-        bounds= new Rectangle(targetImage.getX(), targetImage.getY(), targetImage.getWidth(), targetImage.getHeight());
+        //bounds= new Rectangle(targetImage.getX()+20, targetImage.getY()+20,
+        //        targetImage.getWidth()-40, targetImage.getHeight()-40);
+
+        if(type.getCollisionMask().equals("duck")){
+            Rectangle head = new Rectangle(62, 62, 25,25);
+            Rectangle body= new Rectangle(25,20,targetImage.getWidth() -55, targetImage.getHeight()/2 - 20);
+            compoundBounds.addRect(head);
+            compoundBounds.addRect(body);
+        }
+
+        else if(type.getCollisionMask().equals("board")){
+            Rectangle head = new Rectangle(15, 15, targetImage.getWidth() -30, targetImage.getHeight() -30);
+            compoundBounds.addRect(head);
+        }
 
     }
 
@@ -116,8 +130,8 @@ public class Target extends Group{
 
     }
 
-    public Rectangle getBounds(){
-        return bounds;
+    public CompoundRectangle getBounds(){
+        return compoundBounds;
     }
 
     @Override
@@ -125,7 +139,8 @@ public class Target extends Group{
         super.draw(batch, parentAlpha);
 
         targetImage.localToStageCoordinates(targetStageCoord);
-        bounds.setPosition(targetStageCoord.x, targetStageCoord.y);
+        //bounds.setPosition(targetStageCoord.x + 20, targetStageCoord.y + 20);
+        compoundBounds.setPosition(targetStageCoord.x, targetStageCoord.y);
         targetStageCoord.set(0, 0);
 
         if(MainGame.debug) {
@@ -133,7 +148,13 @@ public class Target extends Group{
             renderer.setProjectionMatrix(batch.getProjectionMatrix());
             renderer.begin(ShapeRenderer.ShapeType.Line);
             renderer.setColor(0, 1, 0, 1);
-            renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
+            for(int i=0; i< compoundBounds.size(); i++){
+                renderer.rect(compoundBounds.getRect(i).x, compoundBounds.getRect(i).y,
+                        compoundBounds.getRect(i).getWidth(), compoundBounds.getRect(i).getHeight());
+                //Gdx.app.log("drawing rects",compoundBounds.getRect(i).x+","+ compoundBounds.getRect(i).y+","+
+                //        compoundBounds.getRect(i).getWidth()+","+ compoundBounds.getRect(i).getHeight());
+            }
+            //renderer.rect(bounds.x, bounds.y, bounds.getWidth(), bounds.getHeight());
             renderer.end();
             batch.begin();
         }
