@@ -5,524 +5,526 @@ filter: Nearest,Nearest
 repeat: none
 text_gameover
   rotate: false
-  xy: 1, 429
+  xy: 1, 951
   size: 349, 72
   orig: 349, 72
   offset: 0, 0
   index: -1
 touchBackground
   rotate: false
-  xy: 1, 227
+  xy: 1, 749
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+touchBackgroundUp
+  rotate: false
+  xy: 1, 547
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 btn_play_clicked
   rotate: false
-  xy: 1, 115
+  xy: 1, 435
   size: 260, 110
   orig: 260, 110
   offset: 0, 0
   index: -1
 btn_play_normal
   rotate: false
-  xy: 1, 3
+  xy: 1, 323
   size: 260, 110
   orig: 260, 110
   offset: 0, 0
   index: -1
 btn_play_selected
   rotate: false
-  xy: 203, 317
+  xy: 1, 211
   size: 260, 110
   orig: 260, 110
   offset: 0, 0
   index: -1
 text_timeup
   rotate: false
-  xy: 203, 246
+  xy: 1, 140
   size: 295, 69
   orig: 295, 69
   offset: 0, 0
   index: -1
 text_ready
   rotate: false
-  xy: 263, 178
+  xy: 1, 72
   size: 230, 66
   orig: 230, 66
   offset: 0, 0
   index: -1
 text_score
   rotate: false
-  xy: 263, 112
+  xy: 1, 6
   size: 193, 64
   orig: 193, 64
   offset: 0, 0
   index: -1
 level
   rotate: false
-  xy: 263, 1
+  xy: 203, 840
   size: 114, 109
   orig: 114, 109
   offset: 0, 0
   index: 0
-touchKnob
-  rotate: false
-  xy: 352, 429
-  size: 72, 72
-  orig: 72, 72
-  offset: 0, 0
-  index: -1
 level
   rotate: false
-  xy: 379, 1
+  xy: 203, 729
   size: 114, 109
   orig: 114, 109
   offset: 0, 0
   index: 1
-btn_small_clicked
-  rotate: false
-  xy: 426, 442
-  size: 74, 59
-  orig: 74, 59
-  offset: 0, 0
-  index: -1
-crosshair_outline_small
-  rotate: false
-  xy: 465, 394
-  size: 46, 46
-  orig: 46, 46
-  offset: 0, 0
-  index: -1
-text
-  rotate: false
-  xy: 465, 334
-  size: 45, 58
-  orig: 45, 58
-  offset: 0, 0
-  index: 8
-text
-  rotate: false
-  xy: 458, 119
-  size: 47, 57
-  orig: 47, 57
-  offset: 0, 0
-  index: 0
-black_box
-  rotate: false
-  xy: 458, 112
-  size: 5, 5
-  orig: 5, 5
-  offset: 0, 0
-  index: -1
-
-hud2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 level
   rotate: false
-  xy: 1, 400
+  xy: 203, 618
   size: 114, 109
   orig: 114, 109
   offset: 0, 0
   index: 2
 level_locked
   rotate: false
-  xy: 1, 289
+  xy: 352, 914
   size: 114, 109
   orig: 114, 109
   offset: 0, 0
   index: -1
 level
   rotate: false
-  xy: 117, 400
+  xy: 319, 803
   size: 113, 109
   orig: 113, 109
   offset: 0, 0
   index: 3
 level
   rotate: false
-  xy: 1, 178
+  xy: 319, 692
   size: 113, 109
   orig: 113, 109
   offset: 0, 0
   index: 4
 level
   rotate: false
-  xy: 117, 289
+  xy: 319, 581
   size: 113, 109
   orig: 113, 109
   offset: 0, 0
   index: 5
 text_go
   rotate: false
-  xy: 232, 443
+  xy: 203, 550
   size: 111, 66
   orig: 111, 66
   offset: 0, 0
   index: -1
+text
+  rotate: false
+  xy: 468, 967
+  size: 43, 56
+  orig: 43, 56
+  offset: 0, 0
+  index: 2
 text_score_small
   rotate: false
-  xy: 345, 470
+  xy: 316, 540
   size: 116, 39
   orig: 116, 39
   offset: 0, 0
   index: -1
+touchKnob
+  rotate: false
+  xy: 233, 66
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+text
+  rotate: false
+  xy: 263, 491
+  size: 47, 57
+  orig: 47, 57
+  offset: 0, 0
+  index: 0
+btn_small_clicked
+  rotate: false
+  xy: 312, 479
+  size: 74, 59
+  orig: 74, 59
+  offset: 0, 0
+  index: -1
 btn_small_normal
   rotate: false
-  xy: 1, 117
+  xy: 388, 479
   size: 74, 59
   orig: 74, 59
   offset: 0, 0
   index: -1
+text
+  rotate: false
+  xy: 263, 431
+  size: 45, 58
+  orig: 45, 58
+  offset: 0, 0
+  index: 8
 btn_small_selected
   rotate: false
-  xy: 116, 228
+  xy: 310, 418
   size: 74, 59
   orig: 74, 59
   offset: 0, 0
   index: -1
-star_large
+text
   rotate: false
-  xy: 463, 465
-  size: 48, 44
-  orig: 48, 44
+  xy: 263, 373
+  size: 45, 56
+  orig: 45, 56
   offset: 0, 0
-  index: -1
+  index: 4
 crosshair_outline_large
   rotate: false
-  xy: 232, 387
+  xy: 386, 423
   size: 54, 54
   orig: 54, 54
   offset: 0, 0
   index: -1
 text
   rotate: false
-  xy: 1, 59
-  size: 45, 56
-  orig: 45, 56
-  offset: 0, 0
-  index: 4
-text
-  rotate: false
-  xy: 232, 328
+  xy: 263, 314
   size: 44, 57
   orig: 44, 57
   offset: 0, 0
   index: 9
-crosshair_blue_large
-  rotate: false
-  xy: 288, 391
-  size: 50, 50
-  orig: 50, 50
-  offset: 0, 0
-  index: -1
 text
   rotate: false
-  xy: 1, 1
-  size: 43, 56
-  orig: 43, 56
-  offset: 0, 0
-  index: 2
-crosshair_red_large
-  rotate: false
-  xy: 116, 176
-  size: 50, 50
-  orig: 50, 50
-  offset: 0, 0
-  index: -1
-text
-  rotate: false
-  xy: 192, 230
+  xy: 263, 255
   size: 42, 57
   orig: 42, 57
   offset: 0, 0
   index: 5
-text
+crosshair_blue_small
   rotate: false
-  xy: 77, 120
-  size: 32, 56
-  orig: 32, 56
+  xy: 263, 211
+  size: 42, 42
+  orig: 42, 42
   offset: 0, 0
-  index: 1
+  index: -1
+crosshair_blue_large
+  rotate: false
+  xy: 310, 366
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+crosshair_red_large
+  rotate: false
+  xy: 309, 314
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
 crosshair_white_large
   rotate: false
-  xy: 111, 124
+  xy: 307, 262
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 text
   rotate: false
-  xy: 48, 59
+  xy: 307, 205
+  size: 44, 55
+  orig: 44, 55
+  offset: 0, 0
+  index: 7
+text
+  rotate: false
+  xy: 468, 909
   size: 41, 56
   orig: 41, 56
   offset: 0, 0
   index: 3
 text
   rotate: false
-  xy: 46, 2
-  size: 44, 55
-  orig: 44, 55
+  xy: 434, 856
+  size: 32, 56
+  orig: 32, 56
   offset: 0, 0
-  index: 7
-text_0_small
-  rotate: false
-  xy: 232, 289
-  size: 32, 37
-  orig: 32, 37
-  offset: 0, 0
-  index: -1
+  index: 1
 text
   rotate: false
-  xy: 236, 231
+  xy: 468, 851
   size: 39, 56
   orig: 39, 56
   offset: 0, 0
   index: 6
 text_slash
   rotate: false
-  xy: 168, 171
+  xy: 298, 148
   size: 38, 55
   orig: 38, 55
   offset: 0, 0
   index: -1
+text_0_small
+  rotate: false
+  xy: 434, 817
+  size: 32, 37
+  orig: 32, 37
+  offset: 0, 0
+  index: -1
+crosshair_outline_small
+  rotate: false
+  xy: 434, 769
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
 text_cross
   rotate: false
-  xy: 163, 123
+  xy: 434, 721
   size: 45, 46
   orig: 45, 46
   offset: 0, 0
   index: -1
-crosshair_blue_small
+star_large
   rotate: false
-  xy: 345, 426
-  size: 42, 42
-  orig: 42, 42
+  xy: 434, 675
+  size: 48, 44
+  orig: 48, 44
   offset: 0, 0
   index: -1
 crosshair_red_small
   rotate: false
-  xy: 389, 426
+  xy: 434, 631
   size: 42, 42
   orig: 42, 42
   offset: 0, 0
   index: -1
 crosshair_white_small
   rotate: false
-  xy: 340, 382
+  xy: 434, 587
   size: 42, 42
   orig: 42, 42
   offset: 0, 0
   index: -1
+text_cross_small
+  rotate: false
+  xy: 468, 817
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+text_2_small
+  rotate: false
+  xy: 482, 778
+  size: 29, 37
+  orig: 29, 37
+  offset: 0, 0
+  index: -1
 text_minus
   rotate: false
-  xy: 384, 386
+  xy: 434, 547
   size: 39, 38
   orig: 39, 38
   offset: 0, 0
   index: -1
-text_3_small
+text_5_small
   rotate: false
-  xy: 433, 432
-  size: 28, 36
-  orig: 28, 36
+  xy: 482, 740
+  size: 29, 36
+  orig: 29, 36
+  offset: 0, 0
+  index: -1
+text_slash_small
+  rotate: false
+  xy: 484, 702
+  size: 27, 36
+  orig: 27, 36
+  offset: 0, 0
+  index: -1
+icon_play
+  rotate: false
+  xy: 484, 675
+  size: 27, 25
+  orig: 27, 25
+  offset: 0, 0
+  index: -1
+icon_target
+  rotate: false
+  xy: 478, 640
+  size: 33, 33
+  orig: 33, 33
+  offset: 0, 0
+  index: -1
+text_8_small
+  rotate: false
+  xy: 196, 33
+  size: 31, 37
+  orig: 31, 37
+  offset: 0, 0
+  index: -1
+text_4_small
+  rotate: false
+  xy: 478, 602
+  size: 30, 36
+  orig: 30, 36
   offset: 0, 0
   index: -1
 text_plus
   rotate: false
-  xy: 463, 425
+  xy: 229, 26
   size: 39, 38
   orig: 39, 38
   offset: 0, 0
   index: -1
+icon_duck
+  rotate: false
+  xy: 270, 31
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
 icon_bullet_empty_long
   rotate: false
-  xy: 208, 184
+  xy: 362, 372
   size: 21, 44
   orig: 21, 44
   offset: 0, 0
   index: -1
 icon_bullet_gold_long
   rotate: false
-  xy: 91, 74
+  xy: 442, 433
   size: 21, 44
   orig: 21, 44
-  offset: 0, 0
-  index: -1
-text_8_small
-  rotate: false
-  xy: 114, 85
-  size: 31, 37
-  orig: 31, 37
-  offset: 0, 0
-  index: -1
-text_2_small
-  rotate: false
-  xy: 266, 289
-  size: 29, 37
-  orig: 29, 37
-  offset: 0, 0
-  index: -1
-icon_bullet_silver_long
-  rotate: false
-  xy: 277, 243
-  size: 21, 44
-  orig: 21, 44
-  offset: 0, 0
-  index: -1
-icon_duck
-  rotate: false
-  xy: 147, 88
-  size: 34, 33
-  orig: 34, 33
-  offset: 0, 0
-  index: -1
-icon_target
-  rotate: false
-  xy: 183, 88
-  size: 33, 33
-  orig: 33, 33
-  offset: 0, 0
-  index: -1
-text_dots
-  rotate: false
-  xy: 278, 346
-  size: 23, 39
-  orig: 23, 39
-  offset: 0, 0
-  index: -1
-text_4_small
-  rotate: false
-  xy: 303, 353
-  size: 30, 36
-  orig: 30, 36
-  offset: 0, 0
-  index: -1
-star_small
-  rotate: false
-  xy: 335, 351
-  size: 32, 29
-  orig: 32, 29
-  offset: 0, 0
-  index: -1
-icon_bullet_empty_short
-  rotate: false
-  xy: 425, 388
-  size: 21, 36
-  orig: 21, 36
-  offset: 0, 0
-  index: -1
-text_7_small
-  rotate: false
-  xy: 448, 387
-  size: 30, 36
-  orig: 30, 36
-  offset: 0, 0
-  index: -1
-text_1_small
-  rotate: false
-  xy: 480, 387
-  size: 23, 36
-  orig: 23, 36
-  offset: 0, 0
-  index: -1
-icon_bullet_gold_short
-  rotate: false
-  xy: 210, 146
-  size: 21, 36
-  orig: 21, 36
-  offset: 0, 0
-  index: -1
-icon_bullet_silver_short
-  rotate: false
-  xy: 369, 344
-  size: 21, 36
-  orig: 21, 36
-  offset: 0, 0
-  index: -1
-text_9_small
-  rotate: false
-  xy: 392, 348
-  size: 30, 36
-  orig: 30, 36
-  offset: 0, 0
-  index: -1
-text_5_small
-  rotate: false
-  xy: 92, 36
-  size: 29, 36
-  orig: 29, 36
-  offset: 0, 0
-  index: -1
-text_cross_small
-  rotate: false
-  xy: 92, 2
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-text_6_small
-  rotate: false
-  xy: 123, 47
-  size: 28, 36
-  orig: 28, 36
-  offset: 0, 0
-  index: -1
-text_slash_small
-  rotate: false
-  xy: 153, 50
-  size: 27, 36
-  orig: 27, 36
   offset: 0, 0
   index: -1
 text_minus_small
   rotate: false
-  xy: 182, 58
+  xy: 270, 1
   size: 28, 28
   orig: 28, 28
-  offset: 0, 0
-  index: -1
-text_dots_small
-  rotate: false
-  xy: 126, 13
-  size: 21, 32
-  orig: 21, 32
-  offset: 0, 0
-  index: -1
-icon_replay
-  rotate: false
-  xy: 303, 327
-  size: 30, 24
-  orig: 30, 24
   offset: 0, 0
   index: -1
 text_plus_small
   rotate: false
-  xy: 297, 297
+  xy: 300, 1
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
-icon_play
+icon_bullet_silver_long
   rotate: false
-  xy: 335, 324
-  size: 27, 25
-  orig: 27, 25
+  xy: 338, 159
+  size: 21, 44
+  orig: 21, 44
+  offset: 0, 0
+  index: -1
+text_7_small
+  rotate: false
+  xy: 307, 110
+  size: 30, 36
+  orig: 30, 36
+  offset: 0, 0
+  index: -1
+text_9_small
+  rotate: false
+  xy: 307, 72
+  size: 30, 36
+  orig: 30, 36
+  offset: 0, 0
+  index: -1
+icon_replay
+  rotate: false
+  xy: 319, 925
+  size: 30, 24
+  orig: 30, 24
+  offset: 0, 0
+  index: -1
+text_dots
+  rotate: false
+  xy: 307, 31
+  size: 23, 39
+  orig: 23, 39
   offset: 0, 0
   index: -1
 icon_levels
   rotate: false
-  xy: 300, 270
+  xy: 196, 6
   size: 23, 25
   orig: 23, 25
   offset: 0, 0
   index: -1
+icon_bullet_empty_short
+  rotate: false
+  xy: 339, 121
+  size: 21, 36
+  orig: 21, 36
+  offset: 0, 0
+  index: -1
+icon_bullet_gold_short
+  rotate: false
+  xy: 339, 83
+  size: 21, 36
+  orig: 21, 36
+  offset: 0, 0
+  index: -1
+star_small
+  rotate: false
+  xy: 478, 571
+  size: 32, 29
+  orig: 32, 29
+  offset: 0, 0
+  index: -1
+text_3_small
+  rotate: false
+  xy: 475, 533
+  size: 28, 36
+  orig: 28, 36
+  offset: 0, 0
+  index: -1
+text_6_small
+  rotate: false
+  xy: 464, 495
+  size: 28, 36
+  orig: 28, 36
+  offset: 0, 0
+  index: -1
+text_1_small
+  rotate: false
+  xy: 465, 457
+  size: 23, 36
+  orig: 23, 36
+  offset: 0, 0
+  index: -1
+icon_bullet_silver_short
+  rotate: false
+  xy: 490, 457
+  size: 21, 36
+  orig: 21, 36
+  offset: 0, 0
+  index: -1
+text_dots_small
+  rotate: false
+  xy: 465, 423
+  size: 21, 32
+  orig: 21, 32
+  offset: 0, 0
+  index: -1
 icon_pause
   rotate: false
-  xy: 300, 243
+  xy: 488, 430
   size: 20, 25
   orig: 20, 25
+  offset: 0, 0
+  index: -1
+black_box
+  rotate: false
+  xy: 434, 540
+  size: 5, 5
+  orig: 5, 5
   offset: 0, 0
   index: -1

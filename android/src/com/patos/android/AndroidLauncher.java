@@ -27,7 +27,7 @@ public class AndroidLauncher extends AndroidApplication {
 		initialize(mainGame, config);
 	}
 
-    @Override
+    /*@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int player = OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
         boolean handled=false;
@@ -73,5 +73,5 @@ public class AndroidLauncher extends AndroidApplication {
         callBack.moveCrosshair(leftX,leftY);
 
         return true;
-    }
+    }*/
 }
