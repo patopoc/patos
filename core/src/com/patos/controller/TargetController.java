@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.patos.MainGame;
+import com.patos.handlers.Level;
 import com.patos.handlers.LevelTarget;
 import com.patos.model.Bullet;
 import com.patos.model.Target;
@@ -22,7 +23,7 @@ public class TargetController {
     public Array<Target> targets;
     public String targetGroup;
     public Array<TargetType> targetTypes;
-    public Array<LevelTarget> levelTargets;
+    private Array<LevelTarget> levelTargets;
     private float elapsedTime=0;
     private int targetsSpawned=0;
     private Engine engine;
@@ -60,6 +61,7 @@ public class TargetController {
             }
 
             //get targetType according specifications in file
+            Gdx.app.log("target type: "+targetType,getTargetType(targetType)+"");
 
             targets.add(new Target(getTargetType(targetType), targetGroup));
         }
@@ -116,11 +118,19 @@ public class TargetController {
 
     public void loadLevelTargets(){
         levelTargets= new Array<LevelTarget>();
-        Array<LevelTarget> fullLevelTarget= new Array<LevelTarget>(engine.levelManager.getLevels().get(engine.levelManager
-                .getCurrentLevel()).targets);
-        for(LevelTarget levelTarget : fullLevelTarget){
-            if(levelTarget.targetGroup.equals(targetGroup))
+        Array<LevelTarget> fullLevelTarget=engine.levelManager.getLevels().get(engine.levelManager
+                .getCurrentLevel()).targets;
+
+        for(int i=0; i< fullLevelTarget.size; i++){
+            if(fullLevelTarget.get(i).targetGroup.equals(targetGroup)) {
+                LevelTarget levelTarget= new LevelTarget();
+                levelTarget.chance= fullLevelTarget.get(i).chance;
+                levelTarget.num= fullLevelTarget.get(i).num;
+                levelTarget.targetGroup= fullLevelTarget.get(i).targetGroup;
+                levelTarget.targetType= fullLevelTarget.get(i).targetType;
+
                 levelTargets.add(levelTarget);
+            }
         }
     }
 

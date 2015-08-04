@@ -83,6 +83,6 @@ public class MenuController extends Group{
     }
 
     private void inAction(float x, float y, Runnable action){
-        addAction(Actions.sequence(Actions.moveTo(x,y,1f),Actions.run(action)));
+        addAction(Actions.sequence(Actions.delay(1f),Actions.moveTo(x,y,1f),Actions.run(action)));
     }
 }

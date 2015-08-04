@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -13,7 +14,7 @@ import com.patos.controller.Engine;
 /**
  * Created by steve on 21/07/2015.
  */
-public class GunTrigger extends Actor{
+public class GunTrigger extends Group {
     public boolean isShooting=false;
 
     private Engine engine;
@@ -22,23 +23,39 @@ public class GunTrigger extends Actor{
     private float shotDuration;
     private float time=0;
     private boolean recharging=false;
+    private HUDButton trigger;
 
     public GunTrigger(Engine engine, float shotDuration) {
         super();
         this.engine=engine;
         this.shotDuration= shotDuration/2;
-        setWidth(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionWidth());
-        setHeight(MainGame.hudAtlas.findRegion("crosshair_outline_large").getRegionHeight());
+        trigger= new HUDButton("touchBackgroundUp","touchBackground","","gun_firing.mp3");
+        trigger.setIcon("crosshair_outline_large");
+        trigger.setSize(140,140);
+        setSize(trigger.getWidth(), trigger.getHeight());
+
         setBounds(0, 0, getWidth(), getHeight());
         setTouchable(Touchable.enabled);
-        addListener(createInputListener());
+        addActor(trigger);
+        trigger.setInputListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                trigger.setState(HUDButton.State.Clicked);
+
+                return shoot();
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                trigger.setState(HUDButton.State.Normal);
+                //isShooting=false;
+            }
+        });
+
+        //addListener(createInputListener());
     }
 
     public InputListener createInputListener(){
         InputListener listener= new InputListener(){
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-
                 return shoot();
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
@@ -65,7 +82,7 @@ public class GunTrigger extends Actor{
         this.y=y;
     }
 
-    @Override
+    /*@Override
     public void draw(Batch batch, float parentAlpha){
         if(isShooting){
             batch.draw(MainGame.hudAtlas.findRegion("crosshair_red_small"), x, y);
@@ -73,7 +90,7 @@ public class GunTrigger extends Actor{
         else{
             batch.draw(MainGame.hudAtlas.findRegion("crosshair_outline_small"), x, y);
         }
-    }
+    }*/
 
     @Override
     public void act(float delta) {

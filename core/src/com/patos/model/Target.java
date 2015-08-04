@@ -74,7 +74,7 @@ public class Target extends Group{
         //        targetImage.getWidth()-40, targetImage.getHeight()-40);
 
         if(type.getCollisionMask().equals("duck")){
-            Rectangle head = new Rectangle(62, 62, 25,25);
+            Rectangle head = new Rectangle(62, 58, 25,30);
             Rectangle body= new Rectangle(25,20,targetImage.getWidth() -55, targetImage.getHeight()/2 - 20);
             compoundBounds.addRect(head);
             compoundBounds.addRect(body);

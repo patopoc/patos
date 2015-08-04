@@ -154,6 +154,15 @@ public class HUDButton extends Group {
     }
 
     @Override
+    public void setSize(float width, float height){
+        super.setSize(width, height);
+        button.setSize(width,height);
+        if(icon != null){
+            icon.setPosition(getWidth() / 2 - icon.getWidth() / 2,
+                    getHeight() / 2 - icon.getHeight() / 2);
+        }
+    }
+    @Override
     public void draw(Batch batch, float parentAlpha){
         super.draw(batch, parentAlpha);
 

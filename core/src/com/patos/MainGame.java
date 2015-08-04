@@ -25,7 +25,7 @@ public class MainGame extends ApplicationAdapter implements OuyaInterface{
     private SpriteBatch batch;
     private Engine engine;
     private int ducksNum=10;
-    private float ducksInterval=3;
+    private float ducksInterval=2;
     private int targetsNum=10;
     private int targetPositions=4;
     private float shotDuration=.5f;
@@ -59,6 +59,12 @@ public class MainGame extends ApplicationAdapter implements OuyaInterface{
 
 	}
 
+    @Override
+    public void dispose(){
+        super.dispose();
+        engine.dispose();
+    }
+
     private void setStage(){
         stallAtlas= new TextureAtlas(Gdx.files.internal("stall.atlas"));
         objectAtlas= new TextureAtlas(Gdx.files.internal("objects.atlas"));
@@ -74,9 +80,30 @@ public class MainGame extends ApplicationAdapter implements OuyaInterface{
 
         drawCompoundBackground("grass", 0, 60);
 
+        Image cloud1= new Image(new TextureRegion(stallAtlas.findRegion("cloud1")));
+        cloud1.addAction(Actions.forever(Actions.sequence(Actions.moveTo(-cloud1.getWidth(), 350, 30f)
+                , Actions.moveTo(worldWidth + cloud1.getWidth(), 350))));
+        cloud1.setPosition(worldWidth + cloud1.getWidth(), 350);
+        stage.addActor(cloud1);
+
+        Image cloud2= new Image(new TextureRegion(stallAtlas.findRegion("cloud2")));
+        cloud2.addAction(Actions.forever(Actions.sequence(Actions.delay(10f)
+                , Actions.moveTo(-cloud2.getWidth(), 330, 25f)
+                , Actions.moveTo(worldWidth + cloud2.getWidth(), 330))));
+        cloud2.setPosition(worldWidth + cloud2.getWidth(), 330);
+        stage.addActor(cloud2);
+
         Image treePine= new Image(new TextureRegion(stallAtlas.findRegion("tree_pine")));
+        treePine.addAction(Actions.forever(Actions.sequence(Actions.rotateBy(5, 5)
+                , Actions.rotateBy(-5, 5))));
         treePine.setPosition(worldWidth - 180, 150);
         stage.addActor(treePine);
+
+        Image oakPine= new Image(new TextureRegion(stallAtlas.findRegion("tree_oak")));
+        oakPine.addAction(Actions.forever(Actions.sequence(Actions.rotateBy(-5, 6)
+                , Actions.rotateBy(5, 6))));
+        oakPine.setPosition(0, 160);
+        stage.addActor(oakPine);
 
         Image backWave= new Image(new TiledDrawable(stallAtlas.findRegion("water1")));
         backWave.setPosition(backWave.getWidth() / 2, -10);

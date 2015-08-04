@@ -57,9 +57,14 @@ public class Engine {
         this.shotDuration= shotDuration;
         soundManager= new SoundManager(this);
         soundManager.loadMusic("music.mp3");
+        soundManager.loadSounds();
         soundManager.playMusic(true, 0.5f);
         show("menu");
 
+    }
+
+    public void dispose(){
+        soundManager.dispose();
     }
 
     public void show(String controllerName){

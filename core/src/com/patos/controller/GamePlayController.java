@@ -82,6 +82,7 @@ public class GamePlayController extends Group {
 
         scoreDisplay= new CounterDisplay(MainGame.hudAtlas.findRegion("icon_duck"),25
                 , TextFont.FontSize.Small,20 ,400);
+        Engine.score=0;
         scoreDisplay.setValue(Engine.score);
         addActor(scoreDisplay);
 
@@ -93,7 +94,7 @@ public class GamePlayController extends Group {
         if(MainGame.forOuya)
             trigger.setPosition(800, MainGame.worldHeight);
         else
-            trigger.setPosition(800, 60);
+            trigger.setPosition(760, 20);
         //aadActor(trigger);
 
         addActor(crosshair);
@@ -210,15 +211,15 @@ public class GamePlayController extends Group {
                 timeup = true;
             }
 
-            if (timeup && !timeupShowed) {
+            if ((timeup && !timeupShowed) || cartridge.getBullets() == 0) {
                 timeupShowed = true;
                 int currentLevel=engine.levelManager.getCurrentLevel();
                 int currentPoints= engine.levelManager.getLevel(currentLevel).currentPoints;
                 int maxPoints= engine.levelManager.getLevel(currentLevel).maxPoints;
 
-                if(Engine.score > currentPoints) {
-                    engine.levelManager.getLevel(currentLevel).currentPoints = Engine.score;
-                    if(Engine.score >= maxPoints){
+                //if(Engine.score > currentPoints) {
+                    engine.levelManager.getLevel(currentLevel).currentPoints += Engine.score;
+                    if(engine.levelManager.getLevel(currentLevel).currentPoints >= maxPoints){
                         engine.levelManager.getLevel(currentLevel).levelPassed=true;
                         if(currentLevel + 1 < engine.levelManager.getLevels().size) {
                             if (!engine.levelManager.getLevel(currentLevel + 1).levelEnabled) {
@@ -227,10 +228,10 @@ public class GamePlayController extends Group {
                         }
                     }
                     engine.levelManager.saveLevels();
-                }
+                //}
 
                 showTimeup();
-                engine.soundManager.stopSound("ducks_quacking.mp3");
+                engine.soundManager.stopSound("ducks_quacking1.wav");
             }
         }
     }
@@ -268,7 +269,7 @@ public class GamePlayController extends Group {
             public void run(){
                 gameIsRunning=true;
                 image.remove();
-                engine.soundManager.playSound("ducks_quacking.mp3", true, 1);
+                engine.soundManager.playSound("ducks_quacking1.wav", true, 1);
                 addActor(buttonContainer);
                 addActor(touchpad);
                 addActor(trigger);
@@ -292,6 +293,7 @@ public class GamePlayController extends Group {
         Image timeupImage= new Image(MainGame.hudAtlas.findRegion("text_timeup"));
         timeupImage.setPosition(MainGame.worldWidth/2 - timeupImage.getWidth()/2,
                 MainGame.worldHeight/2 - timeupImage.getHeight()/2);
+        engine.soundManager.playSound("bell.mp3",false,1);
         timeupImage.addAction(Actions.sequence(Actions.parallel(Actions.moveBy(0, 300, 1f),
                 Actions.fadeOut(1f))
                 , Actions.run(new Runnable() {
