@@ -61,7 +61,7 @@ public class TargetController {
             }
 
             //get targetType according specifications in file
-            Gdx.app.log("target type: "+targetType,getTargetType(targetType)+"");
+            //Gdx.app.log("target type: "+targetType,getTargetType(targetType)+"");
 
             targets.add(new Target(getTargetType(targetType), targetGroup));
         }

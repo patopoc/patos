@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 public class Level {
     public boolean levelPassed;
     public boolean levelEnabled;
+    public int bullets;
     public int maxPoints;
     public int currentPoints;
     public int stars;

@@ -55,6 +55,8 @@ public class LevelManager {
             content += l.levelPassed + ",";
             content += " \"levelEnabled\":";
             content += l.levelEnabled+",";
+            content += " \"bullets\":";
+            content += l.bullets + ",";
             content += " \"maxPoints\":";
             content += l.maxPoints + ",";
             content += " \"currentPoints\":";
@@ -87,6 +89,7 @@ public class LevelManager {
             Level level= new Level();
             level.levelEnabled= jsonValue.getBoolean("levelEnabled");
             level.levelPassed= jsonValue.getBoolean("levelPassed");
+            level.bullets=jsonValue.getInt("bullets");
             level.currentPoints= jsonValue.getInt("currentPoints");
             level.maxPoints=jsonValue.getInt("maxPoints");
             level.stars= jsonValue.getInt("stars");

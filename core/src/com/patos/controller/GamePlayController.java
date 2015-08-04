@@ -47,7 +47,7 @@ public class GamePlayController extends Group {
     private float crosshairX=0;
     private float crosshairY=0;
     private float stepSize=5;
-    private float joypadThreshold=0.2f;
+    private float joypadThreshold=0.4f;
     private float stepsX=0;
     private float stepsY=0;
     private boolean startMotion=false;
@@ -86,7 +86,8 @@ public class GamePlayController extends Group {
         scoreDisplay.setValue(Engine.score);
         addActor(scoreDisplay);
 
-        cartridge= new Cartridge(20, Bullet.BulletType.Small, TextFont.FontSize.Small);
+        int bullets= engine.levelManager.getLevel(engine.levelManager.getCurrentLevel()).bullets;
+        cartridge= new Cartridge(bullets, Bullet.BulletType.Small, TextFont.FontSize.Small);
         cartridge.setPosition(MainGame.worldWidth - 120, 400);
         addActor(cartridge);
 
@@ -211,7 +212,7 @@ public class GamePlayController extends Group {
                 timeup = true;
             }
 
-            if ((timeup && !timeupShowed) || cartridge.getBullets() == 0) {
+            if ((timeup || cartridge.getBullets() == 0) && !timeupShowed) {
                 timeupShowed = true;
                 int currentLevel=engine.levelManager.getCurrentLevel();
                 int currentPoints= engine.levelManager.getLevel(currentLevel).currentPoints;
@@ -230,6 +231,7 @@ public class GamePlayController extends Group {
                     engine.levelManager.saveLevels();
                 //}
 
+                Gdx.app.log("show","timeup, "+timeup);
                 showTimeup();
                 engine.soundManager.stopSound("ducks_quacking1.wav");
             }
